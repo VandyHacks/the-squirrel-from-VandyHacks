@@ -35,10 +35,10 @@ async def hack_times(ctx):
     else:
         # compose string accordingly
         breakdown = "VandyHacks VII " \
-                    + "begins " if start > dt.now() else "ends " + "in " \
-                    + f"{d} days, " if d else ""\
-                    + f"{h} hours, " if h else "" \
-                    + f"{m} minutes and " if m else "" \
+                    + ("begins " if start > dt.now() else "ends ") + "in " \
+                    + (f"{d} days, " if d else "") \
+                    + (f"{h} hours, " if h else "") \
+                    + (f"{m} minutes and " if m else "") \
                     + f"{s} seconds bb"
 
     await ctx.send(breakdown)
