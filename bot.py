@@ -6,8 +6,8 @@ from discord.ext import commands
 
 bot = commands.Bot(command_prefix="vh ")
 
-start = dt.fromtimestamp(1601614800)  # 12am vandy time oct 2 2020
-end = dt.fromtimestamp(1601873940)  # 11:59pm vandy time oct 4 2020
+start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
+end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 
 
 @bot.event
