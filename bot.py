@@ -4,24 +4,44 @@ from datetime import datetime as dt
 import discord
 from discord.ext import commands
 
-bot = commands.Bot(command_prefix='vh ')
+bot = commands.Bot(command_prefix="vh ")
 
 start = dt.fromtimestamp(1601614800)  # 12am vandy time oct 2 2020
+end = dt.fromtimestamp(1601873940)  # 11:59pm vandy time oct 4 2020
+
 
 @bot.event
 async def on_ready():
-    await bot.change_presence(status=discord.Status.online, activity=discord.Activity(name="you make shitty hacks", type=3))
-    print(f'{bot.user.name} is running...')
+    await bot.change_presence(
+        status=discord.Status.online,
+        activity=discord.Activity(name="you make sexy hacks", type=3),
+    )
+    print(f"{bot.user.name} is running...")
 
 
-@bot.command(name="time", aliases=["start"])
+@bot.command(name="time", aliases=["when"])
 async def hack_times(ctx):
-    diff = start - dt.now()
+    if start > dt.now():
+        diff = start - dt.now()  # hackathon yet to start
+    else:
+        diff = end - dt.now()  # hackathon started so give time till end
+
     d = diff.days
     h, m = divmod(diff.seconds, 3600)  # 3600 seconds in an hour
     m, s = divmod(m, 60)
-    # TODO: make it not add a part if it's 0
-    await ctx.send(f"VandyHacks VII begins in {f'{d} days, ' if d else ''}{h} hours, {m} minutes and {s} seconds bb")
+
+    if dt.now() > end:
+        breakdown = "bruh hackathon over what are you doing here"
+    else:
+        # compose string accordingly
+        breakdown = "VandyHacks VII " \
+                    + "begins " if start > dt.now() else "ends " + "in " \
+                    + f"{d} days, " if d else ""\
+                    + f"{h} hours, " if h else "" \
+                    + f"{m} minutes and " if m else "" \
+                    + f"{s} seconds bb"
+
+    await ctx.send(breakdown)
 
 
 @bot.command()
