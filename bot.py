@@ -20,7 +20,7 @@ async def hack_times(ctx):
     h, m = divmod(diff.seconds, 3600)  # 3600 seconds in an hour
     m, s = divmod(m, 60)
     # TODO: make it not add a part if it's 0
-    ctx.send("VandyHacks VII begins in {d} days, {h} hours, {m} minutes and {s} seconds bb")
+    ctx.send("VandyHacks VII begins in {f"{d} days, " if d else ''}{h} hours, {m} minutes and {s} seconds bb")
 
 
 @bot.command()
