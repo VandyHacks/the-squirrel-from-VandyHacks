@@ -43,7 +43,14 @@ async def hack_times(ctx):
 
     await ctx.send(breakdown)
 
+    
+@bot.command()
+@commands.has_permissions(manage_messages=True)
+async def yeet(ctx, amount=1):
+    await ctx.channel.purge(limit=amount, before=ctx.message)
+    await ctx.message.delete()
 
+    
 @bot.command()
 async def ping(ctx):
     await ctx.send(f"Pong! {bot.latency * 1000:.03f}ms")
