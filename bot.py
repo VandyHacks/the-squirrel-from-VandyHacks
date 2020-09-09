@@ -13,7 +13,7 @@ end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingPermissions):
-        await ctx.send("get gud kid")
+        await ctx.send("missing perms, get gud kid")
 
 
 @bot.event
