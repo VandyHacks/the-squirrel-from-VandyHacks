@@ -14,7 +14,7 @@ end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 async def on_ready():
     await bot.change_presence(
         status=discord.Status.online,
-        activity=discord.Activity(name="you make sexy hacks", type=3),
+        activity=discord.Activity(name="you succeed uwu", type=3),
     )
     print(f"{bot.user.name} is running...")
 
@@ -43,7 +43,16 @@ async def hack_times(ctx):
 
     await ctx.send(breakdown)
 
-    
+
+@bot.command()
+async def quest(ctx):
+    # check if DMs
+    if not ctx.guild:
+        await ctx.send("We're really ***digging*** the website this year, are you? ;)")
+    else:
+        await ctx.send('quests in DMs only 👀')
+
+
 @bot.command()
 @commands.has_permissions(manage_messages=True)
 async def yeet(ctx, amount=1):
