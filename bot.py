@@ -36,10 +36,10 @@ async def hack_times(ctx):
         # compose string accordingly
         breakdown = "VandyHacks VII " \
                     + ("begins " if start > dt.now() else "ends ") + "in " \
-                    + (f"{d} days, " if d else "") \
-                    + (f"{h} hours, " if h else "") \
-                    + (f"{m} minutes and " if m else "") \
-                    + f"{s} seconds bb"
+                    + (f"{d} day{'s' * bool(d-1)}, " if d else "") \
+                    + (f"{h} hour{'s' * bool(h-1)}, " if h else "") \
+                    + (f"{m} minute{'s' * bool(m-1)} and " if m else "") \
+                    + f"{s} second{'s' * bool(s-1)} bb"
 
     await ctx.send(breakdown)
 
@@ -48,7 +48,8 @@ async def hack_times(ctx):
 async def quest(ctx):
     # check if DMs
     if not ctx.guild:
-        await ctx.send("We're really ***digging*** the website this year, are you? ;)")
+        print(f"ctx.author embarked on the quest")
+        await ctx.send("This is off the *record*, but we're really ***digging*** the website this year, are you? ;)")
     else:
         await ctx.send('quests in DMs only 👀')
 
