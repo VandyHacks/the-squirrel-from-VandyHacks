@@ -10,6 +10,12 @@ start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
 end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 
 
+@client.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingPermissions):
+        await ctx.send("get gud kid")
+
+
 @bot.event
 async def on_ready():
     await bot.change_presence(
