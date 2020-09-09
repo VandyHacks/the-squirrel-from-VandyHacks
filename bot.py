@@ -49,7 +49,7 @@ async def quest(ctx):
     # check if DMs
     if not ctx.guild:
         print(f"ctx.author embarked on the quest")
-        await ctx.send("This is off the *record*, but we're really ***digging*** the website this year, are you? ;)")
+        await ctx.send("This is off the *record*, but we're really **digging** the website this year, are you? ;)")
     else:
         await ctx.send('quests in DMs only 👀')
 
