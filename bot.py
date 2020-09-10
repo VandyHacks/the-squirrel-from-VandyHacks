@@ -83,7 +83,7 @@ async def ping(ctx):
     await ctx.send(f"Pong! {bot.latency * 1000:.03f}ms")
 
 
-@bot.command(name="github", aliases["gh"])
+@bot.command(name="github", aliases=["gh"])
 async def github(ctx):
     await ctx.send("closed source for now bb")  # potentially abstract stuff away and make this open sourceable?
     # await ctx.send("Catch! https://github.com/aadibajpai/vh-discord-bot")
