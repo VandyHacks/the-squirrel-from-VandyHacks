@@ -89,7 +89,7 @@ async def github(ctx):
     # await ctx.send("Catch! https://github.com/aadibajpai/vh-discord-bot")
 
 
-@commands.command(name="help")
+@bot.command(name="help")
 async def help_message(ctx):
     """
     Sends help message
