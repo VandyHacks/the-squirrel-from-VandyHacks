@@ -89,13 +89,19 @@ async def github(ctx):
     # await ctx.send("Catch! https://github.com/aadibajpai/vh-discord-bot")
 
 
+@bot.command()
+async def lewd(ctx):
+    await ctx.send("<:lewd:748915128824627340>")  # easter egg?
+
+
 @bot.command(name="help")
 async def help_message(ctx):
     """
     Sends help message
     """
 
-    embed = discord.Embed(title="the squirrel from VandyHacks", description="Here are the commands you can use:")
+    embed = discord.Embed(title="the squirrel from VandyHacks", description="Here are the commands you can use:",
+                          color=16761095)
 
     embed.add_field(name="`vh when` or `vh time`", value='Time until VH VII begins!', inline=False)
     embed.add_field(name="`vh quest`", value="slide into DMs with this :eyes:", inline=False)
