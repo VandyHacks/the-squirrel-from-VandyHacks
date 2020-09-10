@@ -9,6 +9,8 @@ bot = commands.Bot(command_prefix="vh ")
 start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
 end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 
+vhxxx = bot.get_guild(424321814152347679)  # vandyhaxxx discord
+
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -25,7 +27,7 @@ async def on_ready():
     print(f"{bot.user.name} is running...")
 
 
-@bot.command(name="time", aliases=["when"])
+@bot.command(name="when", aliases=["time"])
 async def hack_times(ctx):
     if start > dt.now():
         diff = start - dt.now()  # hackathon yet to start
@@ -54,8 +56,12 @@ async def hack_times(ctx):
 async def quest(ctx):
     # check if DMs
     if not ctx.guild:
-        print(f"{ctx.author} embarked on the quest")
-        await ctx.send("This is off the *record*, but we're really **digging** the website this year, are you? ;)")
+        # remove this later when going to prod or swap out to the official server
+        if vhxxx in ctx.author.mutual_guilds:
+            print(f"{ctx.author} embarked on the quest")
+            await ctx.send("This is off the *record*, but we're really **digging** the website this year, are you? ;)")
+        else:
+            await ctx.send("you failed the vibe check, no quest for you")
     else:
         await ctx.send('quests in DMs only 👀')
 
