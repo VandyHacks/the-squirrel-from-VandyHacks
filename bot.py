@@ -3,12 +3,17 @@ from datetime import datetime as dt
 
 import discord
 from discord.ext import commands
+from dotenv import load_dotenv
+
+# load environment variables from .env
+load_dotenv()
 
 bot = commands.Bot(command_prefix="vh ")
 
 start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
 end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 
+ques = ["This is off the *record*, but we're really **digging** the website this year, are you? ;)"]
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -55,10 +60,11 @@ async def quest(ctx):
     # check if DMs
     if not ctx.guild:
         # remove this later when going to prod or swap out to the official server
-        if ctx.author in bot.get_guild(424321814152347679).members:
+        if ctx.author in bot.get_guild(424321814152347679).members:  # vandyhaxxx
             print(f"{ctx.author} embarked on the quest")
-            await ctx.send("This is off the *record*, but we're really **digging** the website this year, are you? ;)")
+            await ctx.send(ques[0])
         else:
+            print(f"{ctx.author} failed the vibe check")
             await ctx.send("you failed the vibe check, no quest for you")
     else:
         await ctx.send('quests in DMs only 👀')
@@ -78,7 +84,7 @@ async def ping(ctx):
 
 @bot.command()
 async def github(ctx):
-    await ctx.send("closed source for now bb")
+    await ctx.send("closed source for now bb")  # potentially abstract stuff away and make this open sourceable?
     # await ctx.send("Catch! https://github.com/aadibajpai/vh-discord-bot")
 
 
