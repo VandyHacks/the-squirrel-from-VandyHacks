@@ -8,12 +8,13 @@ from dotenv import load_dotenv
 # load environment variables from .env
 load_dotenv()
 
-bot = commands.Bot(command_prefix="vh ")
+bot = commands.Bot(command_prefix="vh ", help_command=None)
 
 start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
 end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 
 ques = ["This is off the *record*, but we're really **digging** the website this year, are you? ;)"]
+
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -82,10 +83,28 @@ async def ping(ctx):
     await ctx.send(f"Pong! {bot.latency * 1000:.03f}ms")
 
 
-@bot.command()
+@bot.command(name="github", aliases["gh"])
 async def github(ctx):
     await ctx.send("closed source for now bb")  # potentially abstract stuff away and make this open sourceable?
     # await ctx.send("Catch! https://github.com/aadibajpai/vh-discord-bot")
+
+
+@commands.command(name="help")
+async def help_message(ctx):
+    """
+    Sends help message
+    """
+
+    embed = discord.Embed(title="the squirrel from VandyHacks", description="Here are the commands you can use:")
+
+    embed.add_field(name="`vh when` or `vh time`", value='Time until VH VII begins!', inline=False)
+    embed.add_field(name="`vh quest`", value="slide into DMs with this :eyes:", inline=False)
+    embed.add_field(name="`vh help`", value="Show this message", inline=False)
+    embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code", inline=False)
+    embed.add_field(name="`vh ping`", value="Check bot latency", inline=False)
+    embed.set_footer(text="think of something fun to put here")
+
+    await ctx.send(embed=embed)
 
 
 bot.run(os.environ["DISCORD"])
