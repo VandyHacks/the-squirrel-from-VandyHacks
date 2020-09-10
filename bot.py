@@ -9,8 +9,6 @@ bot = commands.Bot(command_prefix="vh ")
 start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
 end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 
-vhxxx = bot.get_guild(424321814152347679)  # vandyhaxxx discord
-
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -39,7 +37,7 @@ async def hack_times(ctx):
     m, s = divmod(m, 60)
 
     if dt.now() > end:
-        breakdown = "bruh hackathon over what are you doing here"
+        breakdown = "hackathon over come back next year :))"
     else:
         # compose string accordingly
         breakdown = "VandyHacks VII " \
@@ -57,7 +55,7 @@ async def quest(ctx):
     # check if DMs
     if not ctx.guild:
         # remove this later when going to prod or swap out to the official server
-        if ctx.author in vhxxx.members:
+        if ctx.author in bot.get_guild(424321814152347679).members:
             print(f"{ctx.author} embarked on the quest")
             await ctx.send("This is off the *record*, but we're really **digging** the website this year, are you? ;)")
         else:
