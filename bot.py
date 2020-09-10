@@ -57,7 +57,7 @@ async def quest(ctx):
     # check if DMs
     if not ctx.guild:
         # remove this later when going to prod or swap out to the official server
-        if vhxxx in ctx.author.mutual_guilds:
+        if ctx.author in vhxxx.members:
             print(f"{ctx.author} embarked on the quest")
             await ctx.send("This is off the *record*, but we're really **digging** the website this year, are you? ;)")
         else:
