@@ -13,7 +13,8 @@ bot = commands.Bot(command_prefix="vh ", help_command=None)
 start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
 end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 
-ques = ["This is off the *record*, but we're really **digging** the website this year, are you? ;)"]
+ques = ["`----[-->+++++<]>.++[->+++<]>.-[----->+<]>.--[->+++<]>+.[-->+<]>---.+[--->++<]>-.[->+++<]>-.-----.+++++++++++++.-------.[--->+<]>-.+[->+++<]>.+++++++.-------------.+++++++++++++.+.------------.++++++++++++++.+[----->++<]>-.[--->+<]>--.----.+++..+++++++.[->+++++<]>++.[--->+<]>--.++++[->+++<]>.+++++++++.++.[----->++<]>+.++++++++.>--[-->+++<]>.` :brain:fuck", 
+        "This is off the *record*, but we're really **digging** the website this year. Are you? ;)"]
 
 
 @bot.event
