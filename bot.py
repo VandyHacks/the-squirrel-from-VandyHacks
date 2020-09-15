@@ -89,11 +89,11 @@ async def feedback(ctx):
 
     if ctx.author in bot.get_guild(424321814152347679).members:  # vandyhaxxx
         print(f"{ctx.author} is giving feedback")
-        await ctx.author.send("please send your anonymous feedback in the next message bb, "
-                              "it will be directly shared with the organizers!")
+        await ctx.author.send("please send your anonymous feedback in the next message, "
+                              "it will be directly shared with the organizers! :yellow_heart:")
         try:
             feedback = await bot.wait_for('message', check=check, timeout=60)
-            await feedback_channel.send(f"there's new feedback!\n> {feedback.content}")
+            await feedback_channel.send(f"there's new feedback!\n>>> {feedback.content}")
         except TimeoutError:
             await ctx.author.send("oh well good talk nonetheless :)")
 
@@ -137,7 +137,7 @@ async def help_message(ctx):
 
     embed.add_field(name="`vh when` or `vh time`", value='Time until VH VII begins!', inline=False)
     embed.add_field(name="`vh quest`", value="slide into DMs with this :eyes:", inline=False)
-    embed.add_field(name="`vh feedback`", value="send anonymous feedback :wink:", inline=False)
+    embed.add_field(name="`vh feedback`", value="send anonymous feedback", inline=False)
     embed.add_field(name="`vh help`", value="Show this message", inline=False)
     embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code", inline=False)
     embed.add_field(name="`vh ping`", value="Check bot latency", inline=False)
