@@ -83,19 +83,18 @@ async def feedback(ctx):
     """
     feedback_channel = bot.get_channel(752297941468708946)  # appropriate
 
-    # check if DMs
-    if not ctx.guild:
-        # remove this later when going to prod or swap out to the official server
-        if ctx.author in bot.get_guild(424321814152347679).members:  # vandyhaxxx
-            print(f"{ctx.author} is giving feedback")
-            await ctx.author.send("please send you feedback bb, it will be directly shared with the organizers!")
-            feedback = await client.wait_for('message')
-            await feedback_channel.send(f"there's new feedback\n> {feedback}")
-        else:
-            print(f"{ctx.author} failed the vibe check")
-            await ctx.send("you failed the vibe check, no quest for you")
+    def check(m):  # check if author same and in DMs
+        return m.author == ctx.author and m.channel.type == discord.ChannelType.private
+
+    if ctx.author in bot.get_guild(424321814152347679).members:  # vandyhaxxx
+        print(f"{ctx.author} is giving feedback")
+        await ctx.author.send("please send you feedback bb, it will be directly shared with the organizers!\n"
+                              "all anonymous :)")
+        feedback = await client.wait_for('message', check=check)
+        await feedback_channel.send(f"there's new feedback\n> {feedback}")
     else:
-        await ctx.send('quests in DMs only 👀')
+        print(f"{ctx.author} failed the vibe check")
+        await ctx.send("you failed the vibe check, no quest for you")
 
 
 @bot.command()
