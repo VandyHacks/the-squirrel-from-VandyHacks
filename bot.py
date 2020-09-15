@@ -88,9 +88,8 @@ async def feedback(ctx):
 
     if ctx.author in bot.get_guild(424321814152347679).members:  # vandyhaxxx
         print(f"{ctx.author} is giving feedback")
-        await ctx.author.send("please send you feedback bb, it will be directly shared with the organizers!\n"
-                              "all anonymous :)")
-        feedback = await client.wait_for('message', check=check)
+        await ctx.author.send("please send you anonymous feedback bb, it will be directly shared with the organizers!")
+        feedback = await bot.wait_for('message', check=check)
         await feedback_channel.send(f"there's new feedback\n> {feedback}")
     else:
         print(f"{ctx.author} failed the vibe check")
