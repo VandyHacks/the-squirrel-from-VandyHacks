@@ -1,4 +1,5 @@
 import os
+from asyncio import TimeoutError
 from datetime import datetime as dt
 
 import discord
@@ -88,9 +89,14 @@ async def feedback(ctx):
 
     if ctx.author in bot.get_guild(424321814152347679).members:  # vandyhaxxx
         print(f"{ctx.author} is giving feedback")
-        await ctx.author.send("please send you anonymous feedback bb, it will be directly shared with the organizers!")
-        feedback = await bot.wait_for('message', check=check)
-        await feedback_channel.send(f"there's new feedback\n> {feedback}")
+        await ctx.author.send("please send your anonymous feedback in the next message bb, "
+                              "it will be directly shared with the organizers!")
+        try:
+            feedback = await bot.wait_for('message', check=check, timeout=60)
+            await feedback_channel.send(f"there's new feedback!\n> {feedback.content}")
+        except TimeoutError:
+            await ctx.author.send("oh well good talk nonetheless :)")
+
     else:
         print(f"{ctx.author} failed the vibe check")
         await ctx.send("you failed the vibe check, no quest for you")
