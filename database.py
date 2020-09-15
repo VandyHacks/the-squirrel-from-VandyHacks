@@ -5,7 +5,7 @@ from sqlalchemy.schema import CreateTable
 meta = sqlalchemy.MetaData()
 
 # more like questers but that word seems weird
-Hacker = sa.Table(
+Hacker = sqlalchemy.Table(
     "hackers",
     meta,
     sqlalchemy.Column("id", sa.BigInteger, primary_key=True, nullable=False),
