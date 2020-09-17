@@ -11,6 +11,8 @@ load_dotenv()
 
 bot = commands.Bot(command_prefix="vh ", help_command=None)
 
+VHVII = 755112297772351499  # vh vii server guild id
+
 start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
 end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 
@@ -66,8 +68,8 @@ async def hack_times(ctx):
 async def quest(ctx):
     # check if DMs
     if not ctx.guild:
-        # remove this later when going to prod or swap out to the official server
-        if ctx.author in bot.get_guild(424321814152347679).members:  # vandyhaxxx
+        # swapped out to the official server
+        if ctx.author in bot.get_guild(VHVII).members:
             print(f"{ctx.author} embarked on the quest")
             await ctx.send(ques[0])
         else:
@@ -82,19 +84,21 @@ async def feedback(ctx):
     """
     anonymous feedback command, shares stuff to pvt channel
     """
-    feedback_channel = bot.get_channel(752297941468708946)  # appropriate
+    feedback_channel = bot.get_channel(755968512362676284)  # anon-feedback in official vh discord
 
     def check(m):  # check if author same and in DMs
         return m.author == ctx.author and m.channel.type == discord.ChannelType.private
 
-    if ctx.author in bot.get_guild(424321814152347679).members:  # vandyhaxxx
-        print(f"{ctx.author} is giving feedback")
+    if ctx.author in bot.get_guild(VHVII).members:
+        print("someone is giving feedback")
         await ctx.author.send("please send your anonymous feedback in the next message, "
                               "it will be directly shared with the organizers! :yellow_heart:")
         try:
             feedback = await bot.wait_for('message', check=check, timeout=60)
             await feedback_channel.send(f"there's new feedback!\n>>> {feedback.content}")
+            print("someone successfully gave feedback")
         except TimeoutError:
+            print("someone did not reply")
             await ctx.author.send("oh well good talk nonetheless :)")
 
     else:
