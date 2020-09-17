@@ -106,7 +106,7 @@ async def feedback(ctx):
         await ctx.send("you failed the vibe check, no quest for you")
 
 
-@bot.command()
+@bot.command(name="yeet", aliases=["y"])
 @commands.has_permissions(manage_messages=True)
 async def yeet(ctx, amount=1):
     await ctx.channel.purge(limit=amount, before=ctx.message)
