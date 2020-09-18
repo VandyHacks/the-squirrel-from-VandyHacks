@@ -62,7 +62,7 @@ async def get_quest_level(hacker):
     # hacker will be a discord.User
     engine = await prepare_engine()
     print("created engine")
-    exists_query = Hacker.select().where(Hacker.c.id == hacker.id)
+    exists_query = Hacker.select().where(Hacker.c.user_id == hacker.id)
     res = await engine.fetch_one(query=exists_query)
     print(f"fetched query: {res}")
 
