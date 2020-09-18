@@ -85,7 +85,7 @@ async def quest(ctx):
         await ctx.send("send your answer in the next line")
         try:
             answer = await bot.wait_for('message', check=check, timeout=60)
-            if answer == flag:
+            if answer.content == flag:
                 await ctx.send("ggwp bb")
                 print("someone answered correctly")
                 await quest(ctx)  # send next level
@@ -97,7 +97,6 @@ async def quest(ctx):
     else:
         print(f"{ctx.author} failed the vibe check")
         await ctx.send("you failed the vibe check, no quest for you")
-
 
 
 @bot.command()
