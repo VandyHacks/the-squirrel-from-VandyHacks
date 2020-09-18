@@ -2,6 +2,8 @@ import os
 from asyncio import TimeoutError
 from datetime import datetime as dt
 
+from database import get_quest_level
+
 import discord
 from discord.ext import commands
 from dotenv import load_dotenv
@@ -16,12 +18,13 @@ VHVII = 755112297772351499  # vh vii server guild id
 start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
 end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 
-ques = ["```bf\n"
-        "----[-->+++++<]>.++[->+++<]>.-[----->+<]>.--[->+++<]>+.[-->+<]>---.+[--->++<]>-.[->+++<]>-.-----.+++++++++++++"
-        ".-------.[--->+<]>-.+[->+++<]>.+++++++.-------------.+++++++++++++.+.------------.++++++++++++++.+[----->++<]>"
-        "-.[--->+<]>--.----.+++..+++++++.[->+++++<]>++.[--->+<]>--.++++[->+++<]>.+++++++++.++.[----->++<]>+.++++++++.>-"
-        "-[-->+++<]>.\n```",
-        "This is off the *record*, but we're really **digging** the website this year. Are you? ;)"]
+
+# list of pairwise challenge-flags
+ques = [("```bf\n"
+         "----[-->+++++<]>.++[->+++<]>.-[----->+<]>.[->+++++<]>+.+++++++.+++.----.[--->+<]>-.[->+++++<]>++.+++++++++++."
+         "---------.+[-->+<]>.+++++[->++<]>.-------------.+++.+++++++++++++.-.---.>--[-->+++<]>.\n"
+         "```", "vh{horny_ja1l_bonk}"),
+        ("This is off the *record*, but we're really **digging** the website this year. Are you? ;)", "vh{<tbd>}")]
 
 
 @bot.event
@@ -56,22 +59,37 @@ async def hack_times(ctx):
         # compose string accordingly
         breakdown = "VandyHacks VII " \
                     + ("begins " if start > dt.now() else "ends ") + "in " \
-                    + (f"{d} day{'s' * bool(d-1)}, " if d else "") \
-                    + (f"{h} hour{'s' * bool(h-1)}, " if h else "") \
-                    + (f"{m} minute{'s' * bool(m-1)} and " if m else "") \
-                    + f"{s} second{'s' * bool(s-1)} bb"
+                    + (f"{d} day{'s' * bool(d - 1)}, " if d else "") \
+                    + (f"{h} hour{'s' * bool(h - 1)}, " if h else "") \
+                    + (f"{m} minute{'s' * bool(m - 1)} and " if m else "") \
+                    + f"{s} second{'s' * bool(s - 1)} bb"
 
     await ctx.send(breakdown)
 
 
 @bot.command()
 async def quest(ctx):
+
+    def check(m):  # check if author same and in DMs
+        return m.author == ctx.author and m.channel.type == discord.ChannelType.private
+
     # check if DMs
     if not ctx.guild:
         # swapped out to the official server
         if ctx.author in bot.get_guild(VHVII).members:
             print(f"{ctx.author} embarked on the quest")
-            await ctx.send(ques[0])
+            chall, flag = ques[get_quest_level(ctx.author)]
+            await ctx.send(chall)
+            await ctx.send("send your answer in the next line")
+            try:
+                answer = await bot.wait_for('message', check=check, timeout=60)
+                if answer == flag:
+                    await ctx.send("ggwp bb")
+                    print("someone answered correctly")
+                    await quest(ctx)  # send next level
+            except TimeoutError:
+                print("someone did not reply")
+                await ctx.author.send("feel free to come back anytime lolz")
         else:
             print(f"{ctx.author} failed the vibe check")
             await ctx.send("you failed the vibe check, no quest for you")
@@ -94,8 +112,8 @@ async def feedback(ctx):
         await ctx.author.send("please send your anonymous feedback in the next message, "
                               "it will be directly shared with the organizers! :yellow_heart:")
         try:
-            feedback = await bot.wait_for('message', check=check, timeout=60)
-            await feedback_channel.send(f"there's new feedback!\n>>> {feedback.content}")
+            feedback_resp = await bot.wait_for('message', check=check, timeout=60)
+            await feedback_channel.send(f"there's new feedback!\n>>> {feedback_resp.content}")
             print("someone successfully gave feedback")
         except TimeoutError:
             print("someone did not reply")
@@ -112,7 +130,7 @@ async def yeet(ctx, amount=1):
     await ctx.channel.purge(limit=amount, before=ctx.message)
     await ctx.message.delete()
 
-    
+
 @bot.command()
 async def ping(ctx):
     await ctx.send(f"Pong! {bot.latency * 1000:.03f}ms")
@@ -127,7 +145,6 @@ async def github(ctx):
 @bot.command()
 async def lewd(ctx):
     await ctx.send("<:lewd:748915128824627340>")  # easter egg?
-    await ctx.message.delete()
 
 
 @bot.command(name="help")
