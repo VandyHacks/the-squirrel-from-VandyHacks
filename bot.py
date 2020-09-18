@@ -78,7 +78,7 @@ async def quest(ctx):
         # swapped out to the official server
         if ctx.author in bot.get_guild(VHVII).members:
             print(f"{ctx.author} embarked on the quest")
-            chall, flag = ques[get_quest_level(ctx.author)]
+            chall, flag = ques[await get_quest_level(ctx.author)]
             await ctx.send(chall)
             await ctx.send("send your answer in the next line")
             try:
@@ -87,6 +87,8 @@ async def quest(ctx):
                     await ctx.send("ggwp bb")
                     print("someone answered correctly")
                     await quest(ctx)  # send next level
+                else:
+                    await ctx.send("nah, try harder")
             except TimeoutError:
                 print("someone did not reply")
                 await ctx.author.send("feel free to come back anytime lolz")
