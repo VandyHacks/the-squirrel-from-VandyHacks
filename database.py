@@ -17,7 +17,7 @@ Hacker = sqlalchemy.Table(
     "hackers",
     meta,
     sqlalchemy.Column("id", sqlalchemy.BigInteger, primary_key=True, nullable=False),
-    sqlalchemy.Column("name", sqlalchemya.String(length=40), nullable=False),  # just for convenience
+    sqlalchemy.Column("name", sqlalchemy.String(length=40), nullable=False),  # just for convenience
     sqlalchemy.Column("level", sqlalchemy.BigInteger, nullable=False, server_default="0"),
 )
 
