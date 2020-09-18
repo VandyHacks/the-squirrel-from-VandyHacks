@@ -61,10 +61,13 @@ async def make_hacker_profile(members_list, self_id):
 async def get_quest_level(hacker):
     # hacker will be a discord.User
     engine = await prepare_engine()
+    print("created engine")
     exists_query = Hacker.select().where(Hacker.c.id == hacker.id)
     res = await engine.fetch_one(query=exists_query)
+    print("fetched query")
 
     if not len(res):  # user doesn't exist
+        print("user doesn't exist")
         create_query = Hacker.insert()
         create_values = {"user_id": hacker.id, "name": str(hacker)}
         await engine.execute(query=create_query, values=create_values)
