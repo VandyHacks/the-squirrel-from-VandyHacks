@@ -64,9 +64,9 @@ async def get_quest_level(hacker):
     print("created engine")
     exists_query = Hacker.select().where(Hacker.c.id == hacker.id)
     res = await engine.fetch_one(query=exists_query)
-    print("fetched query")
+    print(f"fetched query: {res}")
 
-    if not len(res):  # user doesn't exist
+    if not res:  # user doesn't exist
         print("user doesn't exist")
         create_query = Hacker.insert()
         create_values = {"user_id": hacker.id, "name": str(hacker)}
