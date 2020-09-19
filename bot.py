@@ -35,8 +35,6 @@ async def on_command_error(ctx, error):
 
 @bot.event
 async def on_ready():
-    # create db entries for VHVII members if they don't exist
-    await make_hacker_profile(bot.get_guild(VHVII).members)  # remove after one run
     await bot.change_presence(
         status=discord.Status.online,
         activity=discord.Activity(name="you succeed uwu", type=3),
