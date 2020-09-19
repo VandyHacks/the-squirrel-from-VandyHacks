@@ -2,6 +2,8 @@ import os
 from asyncio import TimeoutError
 from datetime import datetime as dt
 
+from cogs.info import Info
+from cogs.times import Times
 from database import get_quest_level, update_quest_level, make_hacker_profile
 
 import discord
@@ -14,9 +16,6 @@ load_dotenv()
 bot = commands.Bot(command_prefix="vh ", help_command=None)
 
 VHVII = 755112297772351499  # vh vii server guild id
-
-start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
-end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
 
 
 # list of pairwise challenge-flags
@@ -52,31 +51,6 @@ async def on_member_join(member):
 @bot.event
 async def on_guild_join(guild):
     await make_hacker_profile(guild.members)
-
-
-@bot.command(name="when", aliases=["time"])
-async def hack_times(ctx):
-    if start > dt.now():
-        diff = start - dt.now()  # hackathon yet to start
-    else:
-        diff = end - dt.now()  # hackathon started so give time till end
-
-    d = diff.days
-    h, m = divmod(diff.seconds, 3600)  # 3600 seconds in an hour
-    m, s = divmod(m, 60)
-
-    if dt.now() > end:
-        breakdown = "hackathon over come back next year :))"
-    else:
-        # compose string accordingly
-        breakdown = "VandyHacks VII " \
-                    + ("begins " if start > dt.now() else "ends ") + "in " \
-                    + (f"{d} day{'s' * bool(d - 1)}, " if d else "") \
-                    + (f"{h} hour{'s' * bool(h - 1)}, " if h else "") \
-                    + (f"{m} minute{'s' * bool(m - 1)} and " if m else "") \
-                    + f"{s} second{'s' * bool(s - 1)} bb"
-
-    await ctx.send(breakdown)
 
 
 @bot.command()
@@ -150,17 +124,6 @@ async def yeet(ctx, amount=1):
 
 
 @bot.command()
-async def ping(ctx):
-    await ctx.send(f"Pong! {bot.latency * 1000:.03f}ms")
-
-
-@bot.command(name="github", aliases=["gh"])
-async def github(ctx):
-    await ctx.send("closed source for now bb")  # potentially abstract stuff away and make this open sourceable?
-    # await ctx.send("Catch! https://github.com/aadibajpai/vh-discord-bot")
-
-
-@bot.command()
 async def lewd(ctx):
     await ctx.send("<:lewd:748915128824627340>")  # easter egg?
 
@@ -184,5 +147,8 @@ async def help_message(ctx):
 
     await ctx.send(embed=embed)
 
+# add cogs
+bot.add_cog(Info)
+bot.add_cog(Times)
 
 bot.run(os.environ["DISCORD"])
