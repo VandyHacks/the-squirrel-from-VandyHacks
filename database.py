@@ -49,7 +49,7 @@ async def make_hacker_profile(hackers):
     for hacker in hackers:
         if hacker.bot:
             continue
-        exists_query = Hacker.select().where(Hacker.c.id == hacker.id)
+        exists_query = Hacker.select().where(Hacker.c.user_id == hacker.id)
         res = await engine.fetch_one(query=exists_query)
 
         if not res:  # user doesn't exist
