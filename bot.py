@@ -2,7 +2,7 @@ import os
 from asyncio import TimeoutError
 from datetime import datetime as dt
 
-from database import get_quest_level
+from database import get_quest_level, update_quest_level, make_hacker_profile
 
 import discord
 from discord.ext import commands
@@ -35,11 +35,24 @@ async def on_command_error(ctx, error):
 
 @bot.event
 async def on_ready():
+    # create db entries for VHVII members if they don't exist
+    await make_hacker_profile(bot.get_guild(VHVII).members)  # remove after one run
     await bot.change_presence(
         status=discord.Status.online,
         activity=discord.Activity(name="you succeed uwu", type=3),
     )
     print(f"{bot.user.name} is running...")
+
+
+@bot.event
+async def on_member_join(member):
+    # create entries as people join to stagger load
+    await make_hacker_profile([member])
+
+
+@bot.event
+async def on_guild_join(guild):
+    await make_hacker_profile(guild.members)
 
 
 @bot.command(name="when", aliases=["time"])
@@ -80,20 +93,24 @@ async def quest(ctx):
     # swapped out to the official server
     if ctx.author in bot.get_guild(VHVII).members:
         print(f"{ctx.author} embarked on the quest")
-        chall, flag = ques[await get_quest_level(ctx.author)]
-        await ctx.send(chall)
-        await ctx.send("send your answer in the next line")
         try:
-            answer = await bot.wait_for('message', check=check, timeout=60)
-            if answer.content == flag:
-                await ctx.send("ggwp bb")
-                print("someone answered correctly")
-                await quest(ctx)  # send next level
-            else:
-                await ctx.send("nah, try harder")
-        except TimeoutError:
-            print("someone did not reply")
-            await ctx.author.send("feel free to come back anytime lolz")
+            chall, flag = ques[await get_quest_level(ctx.author)]
+            await ctx.send(chall)
+            await ctx.send("send your answer in the next line")
+            try:
+                answer = await bot.wait_for('message', check=check, timeout=60)
+                if answer.content == flag:
+                    await ctx.send("ggwp bb")
+                    print("someone answered correctly")
+                    await update_quest_level(ctx.author)
+                    await quest(ctx)  # send next level
+                else:
+                    await ctx.send("nah, try harder")
+            except TimeoutError:
+                print("someone did not reply")
+                await ctx.author.send("feel free to come back anytime lolz")
+        except IndexError:
+            await ctx.send("congratulations you completed our quest ez")
     else:
         print(f"{ctx.author} failed the vibe check")
         await ctx.send("you failed the vibe check, no quest for you")

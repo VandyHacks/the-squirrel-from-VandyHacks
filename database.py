@@ -41,19 +41,22 @@ async def prepare_engine():
     return ENGINE
 
 
-# add db entry for hacker
-async def make_hacker_profile(members_list, self_id):
+# add db entry for hackers
+async def make_hacker_profile(hackers):
     engine = await prepare_engine()
     create_query_values = []
-    for hacker in members_list:
-        if hacker.id == self_id:
+
+    for hacker in hackers:
+        if hacker.bot:
             continue
         exists_query = Hacker.select().where(Hacker.c.id == hacker.id)
-        res = await engine.fetch_all(query=exists_query)
-        if len(res) == 0:
+        res = await engine.fetch_one(query=exists_query)
+
+        if not res:  # user doesn't exist
             create_query_values.append({"user_id": hacker.id, "name": str(hacker)})
-            logging.debug("Creating profile for member %s.", member.name)
-    if len(create_query_values) > 0:
+            print(f"Creating profile for {hacker.name}")
+
+    if create_query_values:
         create_query = Hacker.insert()
         await engine.execute_many(query=create_query, values=create_query_values)
 
@@ -61,19 +64,16 @@ async def make_hacker_profile(members_list, self_id):
 async def get_quest_level(hacker):
     # hacker will be a discord.User
     engine = await prepare_engine()
-    print("prepared engine")
-    exists_query = Hacker.select().where(Hacker.c.user_id == hacker.id)
-    res = await engine.fetch_one(query=exists_query)
-    print("fetched query")
-
-    if not res:  # user doesn't exist
-        print("user doesn't exist")
-        create_query = Hacker.insert()
-        create_values = {"user_id": hacker.id, "name": str(hacker)}
-        await engine.execute(query=create_query, values=create_values)
-        print(f"created user: {create_values}")
-        return 0  # since default level is 0
-
+    select_query = Hacker.select().where(Hacker.c.user_id == hacker.id)
+    res = await engine.fetch_one(query=select_query)
     return res[Hacker.c.level]
+
+
+async def update_quest_level(hacker):
+    engine = await prepare_engine()
+    # increment level by one
+    update_query = Hacker.update().where(Hacker.c.user_id == hacker.id).values(level=Hacker.c.level + 1)
+    await engine.execute(update_query)
+
 
 
