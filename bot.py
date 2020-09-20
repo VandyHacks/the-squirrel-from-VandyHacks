@@ -61,7 +61,8 @@ async def quest(ctx):
 
     # check if DMs
     if ctx.guild:
-        return await ctx.send('quests in DMs only 👀')
+        await ctx.send('quests in my DMs only 👀')
+        return await ctx.author.send('send `vh quest` :sweat_drops: :sweat_drops:')
 
     # swapped out to the official server
     if ctx.author in bot.get_guild(VHVII).members:
@@ -81,7 +82,7 @@ async def quest(ctx):
                     await ctx.send("nah, try harder")
             except TimeoutError:
                 print("someone did not reply")
-                await ctx.author.send("feel free to come back anytime lolz")
+                await ctx.author.send("feel free to come back anytime :))")
         except IndexError:
             await ctx.send("congratulations you completed our quest ez")
     else:
