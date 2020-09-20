@@ -148,7 +148,7 @@ async def help_message(ctx):
     await ctx.send(embed=embed)
 
 # add cogs
-bot.add_cog(Info)
-bot.add_cog(Times)
+bot.add_cog(Info(bot))
+bot.add_cog(Times(bot))
 
 bot.run(os.environ["DISCORD"])

@@ -1,3 +1,4 @@
 discord.py
 databases[postgresql]
 python-dotenv
+psutil
