@@ -26,9 +26,8 @@ class Info(commands.Cog):
             description=f"Running on a dedicated server with {total_ram}GB RAM.",
             color=16761095)
 
-        embed.add_field(name="Latency", value=f"{self.bot.latency*1000:.03f}ms")
+        embed.add_field(name="Latency", value=f"{self.bot.latency*1000:.03f}ms", inline=False)
 
-        embed.add_field(name="\u200b", inline=False, value="\u200b")
         embed.add_field(name="System CPU Usage", value=f"{psutil.cpu_percent():.02f}%")
         embed.add_field(name="System RAM Usage",
                         value=f"{psutil.virtual_memory().used/1048576:.02f} MB")
@@ -39,7 +38,7 @@ class Info(commands.Cog):
         embed.add_field(name="Bot Uptime",
                         value=f'{timedelta(seconds=int(time.time() - process.create_time()))}')
 
-        embed.add_field(name="\u200b", inline=False, value="\u200b")
+        embed.add_field(name="\u200b", value="thought provoking links", inline=False,)
         embed.add_field(name="Cool Website", value="[https://vandyhacks.org](https://vandyhacks.org)")
         embed.add_field(name="Another Cool Website", value="[https://apply.vandyhacks.org]"
                                                            "(https://apply.vandyhacks.org)")
