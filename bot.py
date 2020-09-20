@@ -19,7 +19,8 @@ VHVII = 755112297772351499  # vh vii server guild id
 
 
 # list of pairwise challenge-flags
-ques = [("```bf\n"
+ques = [("Did you tell Tabriel Ging how much you love VandyHacks?", "vh{v1rtually_the_be$t_<3}"),
+        ("```bf\n"
          "----[-->+++++<]>.++[->+++<]>.-[----->+<]>.-------.+[->+++<]>++.+.[--->+<]>----.--[->+++++<]>+.+[->++<]>+.++++"
          "+++.-------------.++++++++++.++++++++++.++[->+++<]>.+++++++++++++.[-->+<]>---.+[--->++<]>-.[->+++<]>-.>--[-->"
          "+++<]>.\n"
@@ -68,8 +69,9 @@ async def quest(ctx):
     if ctx.author in bot.get_guild(VHVII).members:
         print(f"{ctx.author} embarked on the quest")
         try:
-            chall, flag = ques[await get_quest_level(ctx.author)]
-            await ctx.send(chall)
+            level = await get_quest_level(ctx.author)
+            chall, flag = ques[level]
+            await ctx.send(f"Level {level}: {chall}")
             await ctx.send("send your answer in the next line")
             try:
                 answer = await bot.wait_for('message', check=check, timeout=60)
@@ -104,10 +106,14 @@ async def feedback(ctx):
         print("someone is giving feedback")
         await ctx.author.send("please send your anonymous feedback in the next message, "
                               "it will be directly shared with the organizers! :yellow_heart:")
+        await ctx.author.send("or send q to quit feedback submission.")
         try:
             feedback_resp = await bot.wait_for('message', check=check, timeout=60)
+            if feedback_resp.content == "q":
+                return await ctx.author.send("cool beans :+1:")
             await feedback_channel.send(f"there's new feedback!\n>>> {feedback_resp.content}")
             print("someone successfully gave feedback")
+            await ctx.author.send("successfully sent your feedback!")
         except TimeoutError:
             print("someone did not reply")
             await ctx.author.send("oh well good talk nonetheless :)")
@@ -129,6 +135,11 @@ async def lewd(ctx):
     await ctx.send("<:lewd:748915128824627340>")  # easter egg?
 
 
+@bot.command()
+async def trifecta(ctx):
+    await ctx.send("<:lewd:748915128824627340>")  # easter egg?
+
+
 @bot.command(name="help")
 async def help_message(ctx):
     """
@@ -138,11 +149,12 @@ async def help_message(ctx):
     embed = discord.Embed(title="the squirrel from VandyHacks", description="Here are the commands you can use:",
                           color=16761095)
 
-    embed.add_field(name="`vh when` or `vh time`", value='Time until VH VII begins!', inline=False)
+    embed.add_field(name="`vh when`", value='Time until VH VII begins!', inline=False)
     embed.add_field(name="`vh quest`", value="slide into DMs with this :eyes:", inline=False)
     embed.add_field(name="`vh feedback`", value="send anonymous feedback", inline=False)
     embed.add_field(name="`vh help`", value="Show this message", inline=False)
     embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code", inline=False)
+    embed.add_field(name="`vh stats`", value="Bot deployment info", inline=False)
     embed.add_field(name="`vh ping`", value="Check bot latency", inline=False)
     embed.set_footer(text="think of something fun to put here")
 

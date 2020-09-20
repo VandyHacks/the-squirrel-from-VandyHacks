@@ -1,9 +1,66 @@
-from datetime import datetime as dt
+from datetime import timedelta, timezone as tz, datetime as dt
+from functools import partial
+
 from discord.ext import commands
 
+cst = tz(timedelta(hours=-5))  # cst is 5h behind utc
 
-start = dt.fromtimestamp(1601690400)  # 9pm vandy time oct 2 2020
-end = dt.fromtimestamp(1601906400)  # 9am vandy time oct 4 2020
+start = dt.fromtimestamp(1601690400, tz=cst)  # 9pm vandy time oct 2 2020
+end = dt.fromtimestamp(1601906400, tz=cst)  # 9am vandy time oct 4 2020
+
+nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead of dt.now() for uniformity
+
+# Oct 2-4, 2020
+sched = {
+    '2': [
+        ('7:00 pm', 'Opening Ceremony'),
+        ('7:00 pm', 'Keynote Speaker - Authors of Swipe to Unlock: Business Strategy for Technologists'),
+        ('7:50 pm', 'Keynote Speaker - Jeffrey Rothschild'),
+        ('9:00 pm', 'Hacking begins'),
+        ('9:00 pm', 'Full-Stack Workshop w/ Angular'),
+        ('10:00 pm', 'Intro to Open Source Workshop'),
+        ('11:00 pm', 'SlackBot Workshop')
+    ],
+    '3': [
+        ('8:00 am', 'Neural Networks Workshop'),
+        ('9:00 am', 'React Native Workshop'),
+        ('10:00 am', 'Big Data Workshop'),
+        ('11:00 am', 'Google Cloud Workshop'),
+        ('12:00 pm', 'Full-Stack Workshop w/ React'),
+        ('1:15 pm', 'Sponsor Event'),
+        ('2:00 pm', 'Sponsor Event'),
+        ('2:45 pm', 'Sponsor Event'),
+        ('3:30 pm', 'Zoomba'),
+        ('5:00 pm', 'Let\'s Bake Together!'),
+        ('6:30 pm', 'Keynote Speaker - Karl Mehta'),
+        ('7:20 pm', 'Skribbl.io'),
+        ('8:00 pm', 'Keynote Speaker - Shauna McIntyre'),
+        ('9:00 pm', 'Typing Competition!'),
+        ('10:30 pm', 'Guided meditation and mindfulness'),
+        ('11:30 pm', 'How to solve a Rubik\'s cube!'),
+    ],
+    '4': [
+        ('8:30 am', 'Hacking Ends'),
+        ('8:30 am', 'Make your Demo!'),
+        ('9:45 am', 'Skribbl.io'),
+        ('10:30 am', 'Keynote Speaker - Thiago Olson'),
+        ('10:30 am', 'Judging'),
+        ('3:00 pm', 'Closing Ceremony'),
+    ]
+}
+
+
+def time_left(event):
+    # returns string with duration composed
+    diff = event - nash()
+    d = diff.days
+    h, m = divmod(diff.seconds, 3600)  # 3600 seconds in an hour
+    m, s = divmod(m, 60)
+
+    return (f"{d} day{'s' * bool(d - 1)}, " if d else "") \
+        + (f"{h} hour{'s' * bool(h - 1)}, " if h else "") \
+        + (f"{m} minute{'s' * bool(m - 1)} and " if m else "") \
+        + f"{s} second{'s' * bool(s - 1)}"
 
 
 class Times(commands.Cog):
@@ -11,31 +68,27 @@ class Times(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="when", aliases=["time"])
+    @commands.command(name="when")
     async def hack_times(self, ctx):
-        if start > dt.now():
-            diff = start - dt.now()  # hackathon yet to start
+        if start > nash():
+            event = start  # hackathon yet to start
         else:
-            diff = end - dt.now()  # hackathon started so give time till end
+            event = end  # hackathon started so give time till end
 
-        d = diff.days
-        h, m = divmod(diff.seconds, 3600)  # 3600 seconds in an hour
-        m, s = divmod(m, 60)
-
-        if dt.now() > end:
+        if nash() > end:
             breakdown = "hackathon over come back next year :))"
         else:
             # compose string accordingly
             breakdown = "VandyHacks VII " \
-                        + ("begins " if start > dt.now() else "ends ") + "in " \
-                        + (f"{d} day{'s' * bool(d - 1)}, " if d else "") \
-                        + (f"{h} hour{'s' * bool(h - 1)}, " if h else "") \
-                        + (f"{m} minute{'s' * bool(m - 1)} and " if m else "") \
-                        + f"{s} second{'s' * bool(s - 1)} bb"
+                        + ("begins " if start > nash() else "ends ") \
+                        + "in " + time_left(event) + " bb"
 
         await ctx.send(breakdown)
 
     @commands.command(name="schedule")
     async def schedule(self, ctx):
-        # TODO
-        pass
+        for day, events in sched.items():
+            for event in events:
+                event_time, event_name = event
+                left = dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
+                await ctx.send(f"*{event_name}*` begins in `{time_left(left)}`")

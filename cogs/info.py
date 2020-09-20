@@ -40,10 +40,10 @@ class Info(commands.Cog):
                         value=f'{timedelta(seconds=int(time.time() - process.create_time()))}')
 
         embed.add_field(name=":bulb::link:", value="now some thought provoking links", inline=False)
-        embed.add_field(name="Cool Website", value="[https://vandyhacks.org](https://vandyhacks.org)")
-        embed.add_field(name="Another Cool Website", value="[https://apply.vandyhacks.org]"
+        embed.add_field(name="Cool Website", value="vandyhacks.org](https://vandyhacks.org)")
+        embed.add_field(name="Another Cool Website", value="[apply.vandyhacks.org]"
                                                            "(https://apply.vandyhacks.org)")
-        embed.add_field(name="Source of Cool Websites", value="[https://github.com/VandyHacks]"
+        embed.add_field(name="Source of Cool Websites", value="[github.com/VandyHacks]"
                                                               "(https://github.com/VandyHacks)")
 
         embed.set_footer(text="think of something cool to write here")
