@@ -36,6 +36,6 @@ class Times(commands.Cog):
         await ctx.send(breakdown)
 
     @commands.command(name="schedule")
-    def schedule(self, ctx):
+    async def schedule(self, ctx):
         # TODO
         pass
