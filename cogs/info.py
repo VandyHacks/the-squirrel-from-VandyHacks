@@ -38,12 +38,13 @@ class Info(commands.Cog):
         embed.add_field(name="Bot Uptime",
                         value=f'{timedelta(seconds=int(time.time() - process.create_time()))}')
 
-        embed.add_field(name="Support Server", value="[https://discord.swaglyrics.dev](https://discord.swaglyrics.dev)")
-        embed.add_field(name="Invite", value="[https://invite.swaglyrics.dev](https://invite.swaglyrics.dev)")
-        embed.add_field(name="Source", value="[https://swaglyrics.dev/SwagLyrics-Discord-Bot]"
-                                             "(https://swaglyrics.dev/SwagLyrics-discord-bot)")
+        embed.add_field(name="Cool Website", value="[https://vandyhacks.org](https://vandyhacks.org)")
+        embed.add_field(name="Another Cool Website", value="[https://apply.vandyhacks.org]"
+                                                           "(https://apply.vandyhacks.org)")
+        embed.add_field(name="Source of Cool Websites", value="[https://github.com/VandyHacks]"
+                                                              "(https://github.com/VandyHacks)")
 
-        embed.set_footer(text=f"Made by {app_info.owner} • {self.bot.get_user(512708394994368548)}")
+        embed.set_footer(text="think of something cool to write here")
 
         await ctx.send(embed=embed)
 
