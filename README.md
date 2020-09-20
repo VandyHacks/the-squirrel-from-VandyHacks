@@ -24,6 +24,8 @@ Get Postgres if you don't have it already and make a database called `vh`.
 
 Add your Postgres user and password to the `.env` file like `DB_USER=username` and `DB_PASSWD=password`.
 
+Look into `database.py` on how to create table for first run.
+
 ### Run
 
 That's it ez pz you're done.
