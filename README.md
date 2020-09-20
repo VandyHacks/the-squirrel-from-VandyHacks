@@ -5,18 +5,18 @@ VandyHacks VII Discord Bot
 
 the squirrel from VandyHacks requires Python 3.6+ (we use f-strings lol).
 
-## Installation
+### Installation
 
 Clone the repo by 
 `git clone https://github.com/VandyHacks/the-squirrel-from-VandyHacks.git` or use ssh.
 
 `cd` into the repo and do `pip install -r requirements.txt` (or pip3) to install dependencies.
 
-## Secrets
+### Secrets
 Create a file named `.env` in the repo and add your discord token to it like `DISCORD=your_token_here`.
 This is what links the application to your bot profile.
 
-## Database
+### Database
 This part is only required if you're working on the quests command.
 
 For quests, there is a PostgreSQL DB to store the hacker's current quest level.
@@ -24,7 +24,7 @@ Get Postgres if you don't have it already and make a database called `vh`.
 
 Add your Postgres user and password to the `.env` file like `DB_USER=username` and `DB_PASSWD=password`.
 
-## Run
+### Run
 
 That's it ez pz you're done.
 
