@@ -87,8 +87,9 @@ class Times(commands.Cog):
 
     @commands.command(name="schedule")
     async def schedule(self, ctx):
+        # TODO: add embed and make this return only that day's schedule
         for day, events in sched.items():
             for event in events:
                 event_time, event_name = event
                 left = dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
-                await ctx.send(f"*{event_name}*` begins in `{time_left(left)}`")
+                await ctx.send(f"*{event_name}* begins in `{time_left(left)}`")

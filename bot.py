@@ -135,11 +135,6 @@ async def lewd(ctx):
     await ctx.send("<:lewd:748915128824627340>")  # easter egg?
 
 
-@bot.command()
-async def trifecta(ctx):
-    await ctx.send("<:lewd:748915128824627340>")  # easter egg?
-
-
 @bot.command(name="help")
 async def help_message(ctx):
     """
@@ -154,9 +149,9 @@ async def help_message(ctx):
     embed.add_field(name="`vh feedback`", value="send anonymous feedback", inline=False)
     embed.add_field(name="`vh help`", value="Show this message", inline=False)
     embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code", inline=False)
-    embed.add_field(name="`vh stats`", value="Bot deployment info", inline=False)
-    embed.add_field(name="`vh ping`", value="Check bot latency", inline=False)
-    embed.set_footer(text="think of something fun to put here")
+    embed.add_field(name="`vh stats`", value="Bot deployment info")
+    embed.add_field(name="`vh ping`", value="Check bot latency")
+    embed.set_footer(text="fun fact! vandy has a 3:1 squirrel to student population!")
 
     await ctx.send(embed=embed)
 
