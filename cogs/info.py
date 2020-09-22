@@ -63,7 +63,7 @@ class Info(commands.Cog):
 
     @commands.command(name="where")
     async def vh_where(self, ctx):
-        await ctx.send("twitch: https://www.twitch.tv/vandyhacks \ndevpost: <insert link> \n\n right here :) ")
+        await ctx.send("twitch: <https://www.twitch.tv/vandyhacks> \ndevpost: <insert link> \n\n right here :) ")
 
     @commands.command(name="why")
     async def vh_why(self, ctx):
