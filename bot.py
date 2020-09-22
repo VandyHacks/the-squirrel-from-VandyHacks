@@ -1,6 +1,5 @@
 import os
 from asyncio import TimeoutError
-from datetime import datetime as dt
 
 from cogs.info import Info
 from cogs.times import Times
@@ -38,7 +37,7 @@ async def on_command_error(ctx, error):
 async def on_ready():
     await bot.change_presence(
         status=discord.Status.online,
-        activity=discord.Activity(name="you succeed uwu", type=3),
+        activity=discord.Activity(name="you succeed uwu | vh help", type=3),
     )
     print(f"{bot.user.name} is running...")
 
@@ -75,15 +74,16 @@ async def quest(ctx):
             await ctx.send("send your answer in the next line")
             try:
                 answer = await bot.wait_for('message', check=check, timeout=60)
+                print(answer.content)
                 if answer.content == flag:
-                    await ctx.send("ggwp bb")
-                    print("someone answered correctly")
+                    await ctx.send(":sparkles: Correct! :sparkles:")
+                    print(f"{ctx.author} answered level {level} correctly")
                     await update_quest_level(ctx.author)
                     await quest(ctx)  # send next level
                 else:
                     await ctx.send("nah, try harder")
             except TimeoutError:
-                print("someone did not reply")
+                print(f"{ctx.author} did not reply")
                 await ctx.author.send("feel free to come back anytime :))")
         except IndexError:
             await ctx.send("congratulations you completed our quest ez")
@@ -110,7 +110,7 @@ async def feedback(ctx):
         try:
             feedback_resp = await bot.wait_for('message', check=check, timeout=60)
             if feedback_resp.content == "q":
-                return await ctx.author.send("cool beans :+1:")
+                return await ctx.author.send("cool beans <:vh_heart:757444914983207002>")
             await feedback_channel.send(f"there's new feedback!\n>>> {feedback_resp.content}")
             print("someone successfully gave feedback")
             await ctx.author.send("successfully sent your feedback!")
@@ -145,13 +145,14 @@ async def help_message(ctx):
                           color=16761095)
 
     embed.add_field(name="`vh when`", value='Time until VH VII begins!', inline=False)
-    embed.add_field(name="`vh quest`", value="slide into DMs with this :eyes:", inline=False)
+    embed.add_field(name="`vh quest`", value="super secret quest for you :eyes:", inline=False)
     embed.add_field(name="`vh feedback`", value="send anonymous feedback", inline=False)
-    embed.add_field(name="`vh help`", value="Show this message", inline=False)
+    embed.add_field(name="`vh help`", value="Show this message")
     embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code", inline=False)
     embed.add_field(name="`vh stats`", value="Bot deployment info")
     embed.add_field(name="`vh ping`", value="Check bot latency")
-    embed.set_footer(text="fun fact! vandy has a 3:1 squirrel to student population!")
+    embed.set_footer(text="fun fact: vandy has a 3:1 squirrel to student population!",
+                     icon_url="https://cdn.discordapp.com/emojis/757098871859183687.png?v=1")
 
     await ctx.send(embed=embed)
 

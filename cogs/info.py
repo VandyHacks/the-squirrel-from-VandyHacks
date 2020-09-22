@@ -19,7 +19,6 @@ class Info(commands.Cog):
         """
         Returns bot statistics and technical data.
         """
-        app_info = await self.bot.application_info()
         total_ram = (psutil.virtual_memory().total >> 30) + 1
         embed = discord.Embed(
             title="the squirrel from VandyHacks Bot Stats",
@@ -40,7 +39,7 @@ class Info(commands.Cog):
                         value=f'{timedelta(seconds=int(time.time() - process.create_time()))}')
 
         embed.add_field(name=":bulb::link:", value="now some thought provoking links", inline=False)
-        embed.add_field(name="Cool Website", value="vandyhacks.org](https://vandyhacks.org)")
+        embed.add_field(name="Cool Website", value="[vandyhacks.org](https://vandyhacks.org)")
         embed.add_field(name="Another Cool Website", value="[apply.vandyhacks.org]"
                                                            "(https://apply.vandyhacks.org)")
         embed.add_field(name="Source of Cool Websites", value="[github.com/VandyHacks]"

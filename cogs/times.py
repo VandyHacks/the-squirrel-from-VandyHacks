@@ -1,6 +1,7 @@
 from datetime import timedelta, timezone as tz, datetime as dt
 from functools import partial
 
+import discord
 from discord.ext import commands
 
 cst = tz(timedelta(hours=-5))  # cst is 5h behind utc
@@ -12,7 +13,7 @@ nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead o
 
 # Oct 2-4, 2020
 sched = {
-    '2': [
+    2: [
         ('7:00 pm', 'Opening Ceremony'),
         ('7:00 pm', 'Keynote Speaker - Authors of Swipe to Unlock: Business Strategy for Technologists'),
         ('7:50 pm', 'Keynote Speaker - Jeffrey Rothschild'),
@@ -21,7 +22,7 @@ sched = {
         ('10:00 pm', 'Intro to Open Source Workshop'),
         ('11:00 pm', 'SlackBot Workshop')
     ],
-    '3': [
+    3: [
         ('8:00 am', 'Neural Networks Workshop'),
         ('9:00 am', 'React Native Workshop'),
         ('10:00 am', 'Big Data Workshop'),
@@ -39,7 +40,7 @@ sched = {
         ('10:30 pm', 'Guided meditation and mindfulness'),
         ('11:30 pm', 'How to solve a Rubik\'s cube!'),
     ],
-    '4': [
+    4: [
         ('8:30 am', 'Hacking Ends'),
         ('8:30 am', 'Make your Demo!'),
         ('9:45 am', 'Skribbl.io'),
@@ -89,7 +90,15 @@ class Times(commands.Cog):
     async def schedule(self, ctx):
         # TODO: add embed and make this return only that day's schedule
         for day, events in sched.items():
+            full_day = ["Friday", "Saturday", "Sunday"][day-2]
+            embed = discord.Embed(title="VandyHacks VII Schedule :scroll:",
+                                  description=f"**{full_day}, Oct {day}** so much fun to be had :')",
+                                  color=16761095)
             for event in events:
                 event_time, event_name = event
                 left = dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
-                await ctx.send(f"*{event_name}* begins in `{time_left(left)}`")
+                embed.add_field(name=event_name, value=f"begins in {time_left(left)}", inline=False)
+
+            await ctx.send(embed=embed)
+            # TODO: FIGURE OUT PAGINATION FOR OTHERS
+            break
