@@ -92,12 +92,14 @@ class Times(commands.Cog):
         for day, events in sched.items():
             full_day = ["Friday", "Saturday", "Sunday"][day-2]
             embed = discord.Embed(title="VandyHacks VII Schedule :scroll:",
-                                  description=f"**{full_day}, Oct {day}** so much fun to be had :')",
+                                  description=f"**{full_day}, Oct {day}** \nso much fun to be had :')",
                                   color=16761095)
             for event in events:
                 event_time, event_name = event
-                left = dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
-                embed.add_field(name=event_name, value=f"begins in {time_left(left)}", inline=False)
+                # unapologetically use walrus operator
+                if ((left := dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").
+                        replace(tzinfo=cst)) > nash()):
+                    embed.add_field(name=event_name, value=f"in {time_left(left)}", inline=False)
 
             await ctx.send(embed=embed)
             # TODO: FIGURE OUT PAGINATION FOR OTHERS
