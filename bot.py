@@ -110,7 +110,7 @@ async def feedback(ctx):
         try:
             feedback_resp = await bot.wait_for('message', check=check, timeout=60)
             if feedback_resp.content == "q":
-                return await ctx.author.send("cool beans <:vh_heart:757444914983207002>")
+                return await ctx.author.send("cool beans")
             await feedback_channel.send(f"there's new feedback!\n>>> {feedback_resp.content}")
             print("someone successfully gave feedback")
             await ctx.author.send("successfully sent your feedback!")

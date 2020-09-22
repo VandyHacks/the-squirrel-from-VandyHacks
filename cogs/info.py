@@ -60,3 +60,15 @@ class Info(commands.Cog):
     async def github(self, ctx):
         await ctx.send("closed source for now bb")  # potentially abstract stuff away and make this open sourceable?
         # await ctx.send("Catch! https://github.com/VandyHacks/the-squirrel-from-VandyHacks")
+
+    @commands.command(name="where")
+    async def vh_where(self, ctx):
+        await ctx.send("twitch: https://www.twitch.tv/vandyhacks \ndevpost: <insert link> \n\n right here :) ")
+
+    @commands.command(name="why")
+    async def vh_why(self, ctx):
+        await ctx.send("<:yeehaw:753681271212867685>")
+
+    @commands.command(name="how")
+    async def vh_how(self, ctx):
+        await ctx.send("<add link to hacker guide>")
