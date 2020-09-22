@@ -17,7 +17,7 @@ bot = commands.Bot(command_prefix="vh ", help_command=None)
 VHVII = 755112297772351499  # vh vii server guild id
 
 ques = [("welcome to vh quest! this is a ctf-style, fun treasure hunt where you look for flags like "
-         "`vh{yes_this_is_a_flag_hehe}` hidden in places with cryptic clues to advance to the next level."
+         "`vh{yes_this_is_a_flag_hehe}` hidden in places with cryptic clues to advance to the next level. "
          "Flags are always in the vh{} format. Feel free to reach out for hints and good luck on your quest! "
          "<:vh_heart:757444914983207002>",
          "vh{yes_this_is_a_flag_hehe}"),
