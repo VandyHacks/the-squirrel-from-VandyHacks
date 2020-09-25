@@ -12,7 +12,8 @@ from dotenv import load_dotenv
 # load environment variables from .env
 load_dotenv()
 
-bot = commands.Bot(command_prefix="vh ", help_command=None)
+bot = commands.Bot(command_prefix=["vh ", "vH ", "Vh ", "VH "]
+                   , case_insensitive=True, help_command=None)
 
 VHVII = 755112297772351499  # vh vii server guild id
 
