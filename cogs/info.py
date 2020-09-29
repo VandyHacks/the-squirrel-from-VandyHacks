@@ -1,7 +1,7 @@
 import time
 from datetime import timedelta
 
-from ..database import update_pat_counter
+from database import update_pat_counter
 
 import discord
 import psutil
