@@ -66,7 +66,7 @@ class Info(commands.Cog):
     @commands.command(name="pat")
     async def vh_pat(self, ctx):
         await ctx.send(f"the squirrel from VandyHacks has been pet {await update_pat_counter()} times!")
-        await ctx.send("<:squirrelpat:757100545667366953>")
+        await ctx.send("<a:squirrelpat_gif:760595962048675894>")
 
     @commands.command(name="where")
     async def vh_where(self, ctx):
