@@ -64,7 +64,8 @@ class Info(commands.Cog):
 
     @commands.command(name="where")
     async def vh_where(self, ctx):
-        await ctx.send("right here :) \ntwitch: <https://www.twitch.tv/vandyhacks> \ndevpost: <https://vandyhacks-retro-edn.devpost.com/> ")
+        await ctx.send("right here :) \ntwitch: <https://www.twitch.tv/vandyhacks> "
+                       "\ndevpost: <https://vandyhacks-retro-edn.devpost.com/> ")
 
     @commands.command(name="why")
     async def vh_why(self, ctx):
@@ -72,7 +73,7 @@ class Info(commands.Cog):
 
     @commands.command(name="pat")
     async def vh_pat(self, ctx):
-        self.pat_counter +=1
+        self.pat_counter += 1
         await ctx.send(f"the squirrel from VandyHacks has been pet {self.pat_counter} times!")
         await ctx.send("<:squirrelpat:757100545667366953>")
 
