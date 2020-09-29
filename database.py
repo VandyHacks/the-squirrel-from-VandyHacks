@@ -93,7 +93,7 @@ async def init_pats():
     if not res:  # user doesn't exist
         create_query = Pats.insert()
         print("initializing pat counter")
-        await engine.execute(create_query)
+        await engine.execute(query=create_query, values={"id": 0, "pat": 0})
 
 
 async def update_pat_counter():
