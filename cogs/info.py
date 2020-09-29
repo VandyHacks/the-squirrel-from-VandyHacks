@@ -73,7 +73,7 @@ class Info(commands.Cog):
     @commands.command(name="pat")
     async def vh_pat(self, ctx):
         self.pat_counter +=1
-        await ctx.send(f"The VandyHacks Squirrel has been pat {self.pat_counter} times!")
+        await ctx.send(f"the squirrel from VandyHacks has been pet {self.pat_counter} times!")
         await ctx.send("<:squirrelpat:757100545667366953>")
 
     @commands.command(name="how")
