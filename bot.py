@@ -101,6 +101,7 @@ async def help_message(ctx):
 
     embed.add_field(name="`vh when`", value='Time until VH VII begins!', inline=False)
     embed.add_field(name="`vh quest`", value="super secret quest for you :eyes:", inline=False)
+    embed.add_field(name="`vh pat`", value="pat the squirrel <:squirrelL:757097790181605416>", inline=False)
     embed.add_field(name="`vh feedback`", value="send anonymous feedback", inline=False)
     embed.add_field(name="`vh help`", value="Show this message")
     embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code", inline=False)
