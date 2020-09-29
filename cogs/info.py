@@ -63,6 +63,11 @@ class Info(commands.Cog):
         await ctx.send("closed source for now bb")  # potentially abstract stuff away and make this open sourceable?
         # await ctx.send("Catch! https://github.com/VandyHacks/the-squirrel-from-VandyHacks")
 
+    @commands.command(name="pat")
+    async def vh_pat(self, ctx):
+        await ctx.send(f"the squirrel from VandyHacks has been pet {await update_pat_counter()} times!")
+        await ctx.send("<:squirrelpat:757100545667366953>")
+
     @commands.command(name="where")
     async def vh_where(self, ctx):
         await ctx.send("right here :) \ntwitch: <https://www.twitch.tv/vandyhacks> "
@@ -72,11 +77,17 @@ class Info(commands.Cog):
     async def vh_why(self, ctx):
         await ctx.send("<:yeehaw:753681271212867685>")
 
-    @commands.command(name="pat")
-    async def vh_pat(self, ctx):
-        await ctx.send(f"the squirrel from VandyHacks has been pet {await update_pat_counter()} times!")
-        await ctx.send("<:squirrelpat:757100545667366953>")
-
     @commands.command(name="how")
-    async def vh_how(self, ctx):
+    async def vh_how(self, ctx, *, text=None):
+        if text == "is vh":
+            # for quest
+            await ctx.author.send("thank you for asking <3 vh{PLACEHOLDER}")
         await ctx.send("<add link to hacker guide>")
+
+    @commands.command(name="what")
+    async def vh_what(self, ctx):
+        await ctx.send("bro idk")
+
+    @commands.command(name="who")
+    async def vh_who(self, ctx):
+        await ctx.send("need to think so much stuff sigh")
