@@ -1,4 +1,3 @@
-from bot import VHVII
 from database import get_quest_level, update_quest_level
 
 import discord
@@ -9,6 +8,8 @@ class Quest(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+
+    VHVII = 755112297772351499  # vh vii server guild id
 
     # list of pairwise challenge-flags
     ques = [("welcome to vh quest! this is a ctf-style, fun treasure hunt where you look for flags like "
@@ -47,7 +48,7 @@ class Quest(commands.Cog):
             return await ctx.author.send('send `vh quest` :sweat_drops: :sweat_drops:')
 
         # swapped out to the official server
-        if ctx.author in self.bot.get_guild(VHVII).members:
+        if ctx.author in self.bot.get_guild(self.VHVII).members:
             print(f"{ctx.author} embarked on the quest")
             try:
                 level = await get_quest_level(ctx.author)
