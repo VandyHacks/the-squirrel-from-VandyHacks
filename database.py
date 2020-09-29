@@ -3,7 +3,6 @@ import os
 import sqlalchemy
 from databases import Database
 from dotenv import load_dotenv
-from sqlalchemy.schema import CreateTable
 
 # load environment variables from .env
 load_dotenv()

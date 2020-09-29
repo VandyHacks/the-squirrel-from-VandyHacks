@@ -2,8 +2,9 @@ import os
 from asyncio import TimeoutError
 
 from cogs.info import Info
+from cogs.quest import Quest
 from cogs.times import Times
-from database import get_quest_level, update_quest_level, make_hacker_profile, init_pats
+from database import make_hacker_profile, init_pats
 
 import discord
 from discord.ext import commands
@@ -16,23 +17,6 @@ bot = commands.Bot(command_prefix=["vh ", "vH ", "Vh ", "VH "],
                    case_insensitive=True, help_command=None)
 
 VHVII = 755112297772351499  # vh vii server guild id
-
-ques = [("welcome to vh quest! this is a ctf-style, fun treasure hunt where you look for flags like "
-         "`vh{yes_this_is_a_flag_hehe}` hidden in places with cryptic clues to advance to the next level. "
-         "Flags are always in the vh{} format. Feel free to reach out for hints and good luck on your quest! "
-         "<:vh_heart:757444914983207002>",
-         "vh{yes_this_is_a_flag_hehe}"),
-        ("```bf\n"
-         "----[-->+++++<]>.++[->+++<]>.-[----->+<]>.-------.+[->+++<]>++.+.[--->+<]>----.--[->+++++<]>+.+[->++<]>+.++++"
-         "+++.-------------.++++++++++.++++++++++.++[->+++<]>.+++++++++++++.[-->+<]>---.+[--->++<]>-.[->+++<]>-.>--[-->"
-         "+++<]>.\n"
-         "```",
-         "vh{tabr1el_is_l3wd}"),
-        ("Did you tell Tabriel Ging how much you love VandyHacks? He's asking that frequently.",
-         "vh{v1rtually_the_be$t_<3}"),
-        ("This is off the *record*, but we're really **digging** the website this year. Are you? ;)", "vh{<tbd>}")]
-
-# list of pairwise challenge-flags
 
 
 @bot.event
@@ -61,45 +45,6 @@ async def on_member_join(member):
 @bot.event
 async def on_guild_join(guild):
     await make_hacker_profile(guild.members)
-
-
-@bot.command()
-async def quest(ctx):
-
-    def check(m):  # check if author same and in DMs
-        return m.author == ctx.author and m.channel.type == discord.ChannelType.private
-
-    # check if DMs
-    if ctx.guild:
-        await ctx.send('quests in my DMs only 👀')
-        return await ctx.author.send('send `vh quest` :sweat_drops: :sweat_drops:')
-
-    # swapped out to the official server
-    if ctx.author in bot.get_guild(VHVII).members:
-        print(f"{ctx.author} embarked on the quest")
-        try:
-            level = await get_quest_level(ctx.author)
-            chall, flag = ques[level]
-            await ctx.send(f"Level {level}: {chall}")
-            await ctx.send("send your answer in the next line")
-            try:
-                answer = await bot.wait_for('message', check=check, timeout=60)
-                print(answer.content)
-                if answer.content == flag:
-                    await ctx.send(":sparkles: Correct! :sparkles:")
-                    print(f"{ctx.author} answered level {level} correctly")
-                    await update_quest_level(ctx.author)
-                    await quest(ctx)  # send next level
-                else:
-                    await ctx.send("nah, try harder")
-            except TimeoutError:
-                print(f"{ctx.author} did not reply")
-                await ctx.author.send("feel free to come back anytime :))")
-        except IndexError:
-            await ctx.send("congratulations you completed our quest ez")
-    else:
-        print(f"{ctx.author} failed the vibe check")
-        await ctx.send("you failed the vibe check, no quest for you")
 
 
 @bot.command()
@@ -168,6 +113,7 @@ async def help_message(ctx):
 
 # add cogs
 bot.add_cog(Info(bot))
+bot.add_cog(Quest(bot))
 bot.add_cog(Times(bot))
 
 bot.run(os.environ["DISCORD"])
