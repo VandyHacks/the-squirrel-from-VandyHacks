@@ -13,6 +13,7 @@ class Info(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
+        self.pat_counter = 0
 
     @commands.command(name="stats")
     async def view_stats(self, ctx):
@@ -63,11 +64,17 @@ class Info(commands.Cog):
 
     @commands.command(name="where")
     async def vh_where(self, ctx):
-        await ctx.send("right here :) \ntwitch: <https://www.twitch.tv/vandyhacks> \ndevpost: <insert link> ")
+        await ctx.send("right here :) \ntwitch: <https://www.twitch.tv/vandyhacks> \ndevpost: <https://vandyhacks-retro-edn.devpost.com/> ")
 
     @commands.command(name="why")
     async def vh_why(self, ctx):
         await ctx.send("<:yeehaw:753681271212867685>")
+
+    @commands.command(name="pat")
+    async def vh_pat(self, ctx):
+        self.pat_counter +=1
+        await ctx.send(f"The VandyHacks Squirrel has been pat {self.pat_counter} times!")
+        await ctx.send("<:squirrelpat:757100545667366953>")
 
     @commands.command(name="how")
     async def vh_how(self, ctx):
