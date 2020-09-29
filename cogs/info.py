@@ -1,6 +1,8 @@
 import time
 from datetime import timedelta
 
+from ..database import update_pat_counter
+
 import discord
 import psutil
 from discord.ext import commands
@@ -13,7 +15,6 @@ class Info(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.pat_counter = 0
 
     @commands.command(name="stats")
     async def view_stats(self, ctx):
@@ -73,8 +74,7 @@ class Info(commands.Cog):
 
     @commands.command(name="pat")
     async def vh_pat(self, ctx):
-        self.pat_counter += 1
-        await ctx.send(f"the squirrel from VandyHacks has been pet {self.pat_counter} times!")
+        await ctx.send(f"the squirrel from VandyHacks has been pet {update_pat_counter()} times!")
         await ctx.send("<:squirrelpat:757100545667366953>")
 
     @commands.command(name="how")

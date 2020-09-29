@@ -3,7 +3,7 @@ from asyncio import TimeoutError
 
 from cogs.info import Info
 from cogs.times import Times
-from database import get_quest_level, update_quest_level, make_hacker_profile
+from database import get_quest_level, update_quest_level, make_hacker_profile, init_pats
 
 import discord
 from discord.ext import commands
@@ -43,6 +43,8 @@ async def on_command_error(ctx, error):
 
 @bot.event
 async def on_ready():
+    # create pat counter if not already
+    await init_pats()
     await bot.change_presence(
         status=discord.Status.online,
         activity=discord.Activity(name="you succeed uwu | vh help", type=3),

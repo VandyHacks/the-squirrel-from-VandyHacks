@@ -22,6 +22,14 @@ Hacker = sqlalchemy.Table(
     sqlalchemy.Column("level", sqlalchemy.BigInteger, nullable=False, server_default="0"),
 )
 
+# squirrel pat counter
+Pats = sqlalchemy.Table(
+    "pats",
+    meta,
+    sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, nullable=False),
+    sqlalchemy.Column("pat", sqlalchemy.Integer, nullable=False, server_default="0")
+)
+
 ENGINE = None
 
 """
@@ -75,5 +83,25 @@ async def update_quest_level(hacker):
     update_query = Hacker.update().where(Hacker.c.user_id == hacker.id).values(level=Hacker.c.level + 1)
     await engine.execute(update_query)
 
+
+async def init_pats():
+    # add pat row if doesn't exist already
+    engine = await prepare_engine()
+    exists_query = Pats.select().where(Pats.c.id == 0)
+    res = await engine.fetch_one(query=exists_query)
+
+    if not res:  # user doesn't exist
+        create_query = Pats.insert()
+        print("initializing pat counter")
+        await engine.execute(create_query)
+
+
+async def update_pat_counter():
+    engine = await prepare_engine()
+    # increment pats by one
+    update_query = Pats.update().where(Pats.c.id == 0).values(pat=Pats.c.pat + 1)
+    count = await engine.execute(update_query)
+    print(f"increased pat count to {count}")
+    return count
 
 
