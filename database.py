@@ -98,8 +98,8 @@ async def init_pats():
 
 async def update_pat_counter():
     engine = await prepare_engine()
-    # increment pats by one
-    update_query = Pats.update().where(Pats.c.id == 0).values(pat=Pats.c.pat + 1)
+    # increment pats by one, and return new val
+    update_query = Pats.update().where(Pats.c.id == 0).values(pat=Pats.c.pat + 1).returning()
     count = await engine.execute(update_query)
     print(f"increased pat count to {count}")
     return count
