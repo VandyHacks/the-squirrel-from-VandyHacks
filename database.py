@@ -102,5 +102,3 @@ async def update_pat_counter():
     count = await engine.execute(update_query)
     print(f"increased pat count to {count}")
     return count
-
-

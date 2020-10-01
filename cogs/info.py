@@ -47,7 +47,8 @@ class Info(commands.Cog):
         embed.add_field(name="Source of Cool Websites", value="[github.com/VandyHacks]"
                                                               "(https://github.com/VandyHacks)")
 
-        embed.set_footer(text="think of something cool to write here")
+        embed.set_footer(text="did you pat the squirrel yet? vh pat!",
+                         icon_url="https://cdn.discordapp.com/emojis/757098458413793382.png?v=1")
 
         await ctx.send(embed=embed)
 

@@ -3,7 +3,7 @@ VandyHacks VII Discord Bot
 
 ## Developer Setup
 
-the squirrel from VandyHacks requires Python 3.6+ (we use f-strings lol).
+the squirrel from VandyHacks requires Python 3.8+ (we use the walrus operator lol).
 
 ### Installation
 
