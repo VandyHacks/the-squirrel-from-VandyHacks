@@ -9,7 +9,7 @@ async def paginate_embed(bot, channel, embeds):
 
     curr_page = 0
 
-    og_msg = await channel.send(embed=embeds[curr_page])
+    og_msg = await channel.send(embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}"))
     if total_pages <= 1:
         return
 
@@ -31,12 +31,14 @@ async def paginate_embed(bot, channel, embeds):
             if str(reaction.emoji) == "➡":
                 if curr_page < total_pages - 1:
                     curr_page += 1
-                    await og_msg.edit(embed=embeds[curr_page])
+                    await og_msg.edit(
+                        embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}"))
                 await og_msg.remove_reaction("➡", user)
             elif str(reaction.emoji) == "⬅":
                 if curr_page > 0:
                     curr_page -= 1
-                    await og_msg.edit(embed=embeds[curr_page])
+                    await og_msg.edit(
+                        embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}"))
                 await og_msg.remove_reaction("⬅", user)
             else:
                 continue
