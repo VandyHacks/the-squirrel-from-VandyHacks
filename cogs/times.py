@@ -16,9 +16,11 @@ nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead o
 # Oct 2-4, 2020
 sched = {
     2: [
+		('4:30pm', 'Team Matching - Glimpse Session'),
         ('6:00 pm', 'Opening Ceremony'),
         ('7:00 pm', 'Keynote Speaker - Authors of Swipe to Unlock: Business Strategy for Technologists'),
         ('7:50 pm', 'Keynote Speaker - Jeffrey Rothschild'),
+		('8:30pm', 'Team Matching - Glimpse Session'),
         ('9:00 pm', 'Hacking begins'),
         ('9:00 pm', 'Full-Stack Workshop w/ Angular'),
         ('9:00 pm', 'Google Cloud Tech Talk - Cloud Hero Workshop'),
