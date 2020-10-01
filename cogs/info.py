@@ -71,7 +71,8 @@ class Info(commands.Cog):
     @commands.command(name="where")
     async def vh_where(self, ctx):
         await ctx.send("right here :) \ntwitch: <https://www.twitch.tv/vandyhacks> "
-                       "\ndevpost: <https://vandyhacks-retro-edn.devpost.com/> ")
+                       "\ndevpost: <https://vandyhacks-retro-edn.devpost.com/> "
+                       "\nday of: <https://dayof.vandyhacks.org/>")
 
     @commands.command(name="why")
     async def vh_why(self, ctx):

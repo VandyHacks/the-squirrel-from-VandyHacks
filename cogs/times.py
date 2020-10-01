@@ -1,6 +1,8 @@
 from datetime import timedelta, timezone as tz, datetime as dt
 from functools import partial
 
+from utils import paginate_embed
+
 import discord
 from discord.ext import commands
 
@@ -59,9 +61,9 @@ def time_left(event):
     m, s = divmod(m, 60)
 
     return (f"{d} day{'s' * bool(d - 1)}, " if d else "") \
-        + (f"{h} hour{'s' * bool(h - 1)}, " if h else "") \
-        + (f"{m} minute{'s' * bool(m - 1)} and " if m else "") \
-        + f"{s} second{'s' * bool(s - 1)}"
+           + (f"{h} hour{'s' * bool(h - 1)}, " if h else "") \
+           + (f"{m} minute{'s' * bool(m - 1)} and " if m else "") \
+           + f"{s} second{'s' * bool(s - 1)}"
 
 
 class Times(commands.Cog):
@@ -89,8 +91,9 @@ class Times(commands.Cog):
     @commands.command(name="schedule")
     async def schedule(self, ctx):
         # TODO: add embed and make this return only that day's schedule
+        embeds = []
         for day, events in sched.items():
-            full_day = ["Friday", "Saturday", "Sunday"][day-2]
+            full_day = ["Friday", "Saturday", "Sunday"][day - 2]
             embed = discord.Embed(title="VandyHacks VII Schedule :scroll:",
                                   description=f"**{full_day}, Oct {day}** \nso much fun to be had :')",
                                   color=16761095)
@@ -99,8 +102,9 @@ class Times(commands.Cog):
                 # unapologetically use walrus operator
                 if ((left := dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").
                         replace(tzinfo=cst)) > nash()):
-                    embed.add_field(name=f"{num+1}. {event_name}", value=f"in {time_left(left)}", inline=False)
+                    embed.add_field(name=f"{num + 1}. {event_name}", value=f"in {time_left(left)}", inline=False)
 
-            await ctx.send(embed=embed)
-            # TODO: FIGURE OUT PAGINATION FOR OTHERS
-            break
+            embeds.append(embed)
+
+        # TODO: split saturday into two embeds
+        await paginate_embed(self.bot, ctx.channel, embeds)
