@@ -29,13 +29,14 @@ sched = {
         ('9:00 am', 'React Native Workshop'),
         ('10:00 am', 'Big Data Workshop'),
         ('11:00 am', 'Google Cloud Workshop'),
-        ('12:00 pm', 'Full-Stack Workshop w/ React'),
-        ('1:15 pm', 'Sponsor Event'),
-        ('2:00 pm', 'Sponsor Event'),
-        ('2:45 pm', 'Sponsor Event'),
+        ('1:00 pm', 'Sponsor Career Fair'),
         ('3:30 pm', 'Zoomba'),
+        ('4:30 pm', 'MLH Werewolf'),
+        ('4:45 pm', 'Exploring Data-Driven Advocacy - The % Project'),
         ('5:00 pm', 'Let\'s Bake Together!'),
-        ('6:30 pm', 'Keynote Speaker - Karl Mehta'),
+        ('6:00 pm', 'MLH Capture The Flag'),
+        ('6:30 pm', '[Keynote Speaker - Karl Mehta](https://vanderbilt.zoom.us/j/98109827103?'
+                    'pwd=OXFVZkRud0FkejhHZDhqV1VES1JvQT09)'),
         ('7:20 pm', 'Skribbl.io'),
         ('8:00 pm', 'Keynote Speaker - Shauna McIntyre'),
         ('9:00 pm', 'Typing Competition!'),
@@ -45,9 +46,11 @@ sched = {
     4: [
         ('8:30 am', 'Hacking Ends'),
         ('8:30 am', 'Make your Demo!'),
+        ('8:30 am', 'How To Demo Workshop'),
         ('9:45 am', 'Skribbl.io'),
         ('10:30 am', 'Keynote Speaker - Thiago Olson'),
         ('10:30 am', 'Judging'),
+        ('1:20 pm', 'Keynote Speaker - Jennison Asuncion'),
         ('3:00 pm', 'Closing Ceremony'),
     ]
 }
@@ -90,7 +93,6 @@ class Times(commands.Cog):
 
     @commands.command(name="schedule")
     async def schedule(self, ctx):
-        # TODO: add embed and make this return only that day's schedule
         embeds = []
         for day, events in sched.items():
             full_day = ["Friday", "Saturday", "Sunday"][day - 2]
