@@ -1,3 +1,5 @@
+from asyncio import TimeoutError
+
 from database import get_quest_level, update_quest_level
 
 import discord

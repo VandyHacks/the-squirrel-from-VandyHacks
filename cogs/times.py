@@ -20,7 +20,7 @@ sched = {
         ('6:00 pm', 'Opening Ceremony'),
         ('7:00 pm', 'Keynote Speaker - Authors of Swipe to Unlock: Business Strategy for Technologists'),
         ('7:50 pm', 'Keynote Speaker - Jeffrey Rothschild'),
-        ('8:30pm', 'Team Matching - Glimpse Session'),
+        ('8:30 pm', 'Team Matching - Glimpse Session'),
         ('9:00 pm', 'Hacking begins'),
         ('9:00 pm', 'Full-Stack Workshop w/ Angular'),
         ('9:00 pm', 'Google Cloud Tech Talk - Cloud Hero Workshop'),

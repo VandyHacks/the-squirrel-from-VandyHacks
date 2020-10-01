@@ -1,4 +1,4 @@
-import asyncio
+from asyncio import TimeoutError
 
 
 async def paginate_embed(bot, channel, embeds):
@@ -42,7 +42,7 @@ async def paginate_embed(bot, channel, embeds):
                 await og_msg.remove_reaction("⬅", user)
             else:
                 continue
-    except asyncio.TimeoutError:
+    except TimeoutError:
         await og_msg.remove_reaction("⬅", bot.user)
         await og_msg.remove_reaction("➡", bot.user)
         return
