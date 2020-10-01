@@ -16,11 +16,12 @@ nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead o
 # Oct 2-4, 2020
 sched = {
     2: [
-        ('7:00 pm', 'Opening Ceremony'),
+        ('6:00 pm', 'Opening Ceremony'),
         ('7:00 pm', 'Keynote Speaker - Authors of Swipe to Unlock: Business Strategy for Technologists'),
         ('7:50 pm', 'Keynote Speaker - Jeffrey Rothschild'),
         ('9:00 pm', 'Hacking begins'),
         ('9:00 pm', 'Full-Stack Workshop w/ Angular'),
+        ('9:00 pm', 'Google Cloud Tech Talk - Cloud Hero Workshop'),
         ('10:00 pm', 'Intro to Open Source Workshop'),
         ('11:00 pm', 'SlackBot Workshop')
     ],
@@ -31,8 +32,8 @@ sched = {
         ('11:00 am', 'Google Cloud Workshop'),
         ('1:00 pm', 'Sponsor Career Fair'),
         ('3:30 pm', 'Zoomba'),
+        ('4:00 pm', 'Exploring Data-Driven Advocacy - The % Project'),
         ('4:30 pm', 'MLH Werewolf'),
-        ('4:45 pm', 'Exploring Data-Driven Advocacy - The % Project'),
         ('5:00 pm', 'Let\'s Bake Together!'),
         ('6:00 pm', 'MLH Capture The Flag'),
         ('6:30 pm', 'Keynote Speaker - Karl Mehta'),
@@ -40,7 +41,7 @@ sched = {
         ('8:00 pm', 'Keynote Speaker - Shauna McIntyre'),
         ('9:00 pm', 'Typing Competition!'),
         ('10:30 pm', 'Guided meditation and mindfulness'),
-        ('11:30 pm', 'How to solve a Rubik\'s cube!'),
+        ('11:30 pm', 'How to solve a Rubik\'s cube?'),
     ],
     4: [
         ('8:30 am', 'Hacking Ends'),
