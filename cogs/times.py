@@ -35,8 +35,7 @@ sched = {
         ('4:45 pm', 'Exploring Data-Driven Advocacy - The % Project'),
         ('5:00 pm', 'Let\'s Bake Together!'),
         ('6:00 pm', 'MLH Capture The Flag'),
-        ('6:30 pm', '[Keynote Speaker - Karl Mehta](https://vanderbilt.zoom.us/j/98109827103?'
-                    'pwd=OXFVZkRud0FkejhHZDhqV1VES1JvQT09)'),
+        ('6:30 pm', 'Keynote Speaker - Karl Mehta'),
         ('7:20 pm', 'Skribbl.io'),
         ('8:00 pm', 'Keynote Speaker - Shauna McIntyre'),
         ('9:00 pm', 'Typing Competition!'),
