@@ -16,45 +16,46 @@ nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead o
 # Oct 2-4, 2020
 sched = {
     2: [
-        ('4:30 pm', 'Team Matching - Glimpse Session'),
-        ('6:00 pm', 'Opening Ceremony'),
-        ('7:00 pm', 'Keynote Speaker - Authors of Swipe to Unlock: Business Strategy for Technologists'),
-        ('7:50 pm', 'Keynote Speaker - Jeffrey Rothschild'),
-        ('8:30 pm', 'Team Matching - Glimpse Session'),
-        ('9:00 pm', 'Hacking begins'),
-        ('9:00 pm', 'Full-Stack Workshop w/ Angular'),
-        ('9:00 pm', 'Google Cloud Tech Talk - Cloud Hero Workshop'),
-        ('10:00 pm', 'Intro to Open Source Workshop'),
-        ('11:00 pm', 'SlackBot Workshop')
+        ('4:30 pm', 'Team Matching - Glimpse Session', ''),
+        ('6:00 pm', 'Opening Ceremony', 'https://www.twitch.tv/vandyhacks'),
+        ('7:00 pm', 'Keynote Speaker - Authors of Swipe to Unlock: Business Strategy for Technologists',
+         'https://vanderbilt.zoom.us/j/99212620856'),
+        ('7:50 pm', 'Keynote Speaker - Jeffrey Rothschild', 'https://vanderbilt.zoom.us/j/99212620856'),
+        ('8:30 pm', 'Team Matching - Glimpse Session', ''),
+        ('9:00 pm', 'Hacking begins', ''),
+        ('9:00 pm', 'Full-Stack Workshop w/ Angular', 'https://youtu.be/peKt6tRog60'),
+        ('9:00 pm', 'Google Cloud Tech Talk - Cloud Hero Workshop', 'https://youtu.be/lrEYwt9ZpyQ'),
+        ('10:00 pm', 'Intro to Open Source Workshop', 'https://youtu.be/0fkE7Awceig'),
+        ('11:00 pm', 'SlackBot Workshop', 'https://youtu.be/12lSoyqgSxw')
     ],
     3: [
-        ('8:00 am', 'Neural Networks Workshop'),
-        ('9:00 am', 'React Native Workshop'),
-        ('10:00 am', 'Big Data Workshop'),
-        ('11:00 am', 'Google Cloud Workshop'),
-        ('1:00 pm', 'Sponsor Career Fair'),
-        ('3:30 pm', 'Zoomba'),
-        ('4:00 pm', 'Exploring Data-Driven Advocacy - The % Project'),
-        ('4:30 pm', 'MLH Werewolf'),
-        ('5:00 pm', 'Let\'s Bake Together!'),
-        ('6:00 pm', 'MLH Capture The Flag'),
-        ('6:30 pm', 'Keynote Speaker - Karl Mehta'),
-        ('7:20 pm', 'Skribbl.io'),
-        ('8:00 pm', 'Keynote Speaker - Shauna McIntyre'),
-        ('9:00 pm', 'Typing Competition!'),
-        ('10:30 pm', 'Guided meditation and mindfulness'),
-        ('11:30 pm', 'How to solve a Rubik\'s cube?'),
+        ('8:00 am', 'Neural Networks Workshop', 'https://youtu.be/Yue_yX5k-Hc'),
+        ('9:00 am', 'React Native Workshop', 'https://youtu.be/e2JHoda3RZU'),
+        ('10:00 am', 'Big Data Workshop', 'https://youtu.be/txRjZvOAMnc'),
+        ('11:00 am', 'Google Cloud Workshop', 'https://youtu.be/D_H4vchrSn8'),
+        ('1:00 pm', 'Sponsor Career Fair', ''),
+        ('3:30 pm', 'Zoomba', ''),
+        ('4:00 pm', 'Exploring Data-Driven Advocacy - The % Project', ''),
+        ('4:30 pm', 'MLH Werewolf', ''),
+        ('5:00 pm', 'Let\'s Bake Together!', ''),
+        ('6:00 pm', 'MLH Capture The Flag', ''),
+        ('6:30 pm', 'Keynote Speaker - Karl Mehta', 'https://vanderbilt.zoom.us/j/98068882082'),
+        ('7:20 pm', 'Skribbl.io', ''),
+        ('8:00 pm', 'Keynote Speaker - Shauna McIntyre', 'https://vanderbilt.zoom.us/j/96530548899'),
+        ('9:00 pm', 'Typing Competition!', ''),
+        ('10:30 pm', 'Guided meditation and mindfulness', ''),
+        ('11:30 pm', 'How to solve a Rubik\'s cube?', ''),
     ],
     4: [
-        ('8:30 am', 'Hacking Ends'),
-        ('8:30 am', 'Make your Demo!'),
-        ('8:30 am', 'How To Demo Workshop'),
-        ('9:30 am', 'Finish your Demo!'),
-        ('9:45 am', 'Skribbl.io'),
-        ('10:30 am', 'Keynote Speaker - Thiago Olson'),
-        ('10:30 am', 'Judging'),
-        ('1:20 pm', 'Keynote Speaker - Jennison Asuncion'),
-        ('3:00 pm', 'Closing Ceremony'),
+        ('8:30 am', 'Hacking Ends', ''),
+        ('8:30 am', 'Make your Demo!', ''),
+        ('8:30 am', 'How To Demo Workshop', ''),
+        ('9:30 am', 'Finish your Demo!', ''),
+        ('9:45 am', 'Skribbl.io', ''),
+        ('10:30 am', 'Keynote Speaker - Thiago Olson', ''),
+        ('10:30 am', 'Judging', ''),
+        ('1:20 pm', 'Keynote Speaker - Jennison Asuncion', ''),
+        ('3:00 pm', 'Closing Ceremony', ''),
     ]
 }
 
@@ -103,11 +104,13 @@ class Times(commands.Cog):
                                   description=f"**{full_day}, Oct {day}** \nso much fun to be had :')",
                                   color=16761095)
             for num, event in enumerate(events):
-                event_time, event_name = event
+                event_time, event_name, link = event
                 # unapologetically use walrus operator
                 if ((left := dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").
                         replace(tzinfo=cst)) > nash()):
-                    embed.add_field(name=f"{num + 1}. {event_name}", value=f"in {time_left(left)}", inline=False)
+                    embed.add_field(name=f"{num + 1}. {event_name}",
+                                    value=(f"in {time_left(left)}" + (f", [**link**]({link})" if link else '')),
+                                    inline=False)
 
             embeds.append(embed)
 
