@@ -84,7 +84,7 @@ class Info(commands.Cog):
         if text == "is vh":
             # for quest
             await ctx.author.send("thank you for asking <3 vh{PLACEHOLDER}")
-        await ctx.send("<add link to hacker guide>")
+        await ctx.send("https://hackerguide.vandyhacks.org/")
 
     @commands.command(name="what")
     async def vh_what(self, ctx):

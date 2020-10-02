@@ -100,11 +100,15 @@ async def help_message(ctx):
                           color=16761095)
 
     embed.add_field(name="`vh when`", value='Time until VH VII begins!', inline=False)
+    embed.add_field(name="`vh schedule`", value="interactive events schedule :calendar_spiral:", inline=False)
     embed.add_field(name="`vh quest`", value="super secret quest for you :eyes:", inline=False)
     embed.add_field(name="`vh pat`", value="pat the squirrel <:squirrelL:757097790181605416>", inline=False)
     embed.add_field(name="`vh feedback`", value="send anonymous feedback", inline=False)
-    embed.add_field(name="`vh help`", value="Show this message")
-    embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code", inline=False)
+    embed.add_field(name="`vh help`", value="Show this message", inline=False)
+    embed.add_field(name="`vh where`", value="important hackathon links")
+    embed.add_field(name="`vh how`", value="VH VII hacker guide")
+    embed.add_field(name="`vh why`", value="why")
+    embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code")
     embed.add_field(name="`vh stats`", value="Bot deployment info")
     embed.add_field(name="`vh ping`", value="Check bot latency")
     embed.set_footer(text="fun fact: vandy has a 3:1 squirrel to student population!",
