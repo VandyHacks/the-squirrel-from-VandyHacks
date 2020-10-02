@@ -49,29 +49,25 @@ class Quest(commands.Cog):
             await ctx.send('quests in my DMs only 👀')
             return await ctx.author.send('send `vh quest` :sweat_drops: :sweat_drops:')
 
-        # swapped out to the official server
-        if ctx.author in self.bot.get_guild(self.VHVII).members:
-            print(f"{ctx.author} embarked on the quest")
+        print(f"{ctx.author} embarked on the quest")
+        try:
+            level = await get_quest_level(ctx.author)
+            chall, flag = self.ques[level]
+            await ctx.send(f"Level {level}: {chall}")
+            await ctx.send("send your answer in the next line")
             try:
-                level = await get_quest_level(ctx.author)
-                chall, flag = self.ques[level]
-                await ctx.send(f"Level {level}: {chall}")
-                await ctx.send("send your answer in the next line")
-                try:
-                    answer = await self.bot.wait_for('message', check=check, timeout=60)
-                    print(answer.content)
-                    if answer.content == flag:
-                        await ctx.send(":sparkles: Correct! :sparkles:")
-                        print(f"{ctx.author} answered level {level} correctly")
-                        await update_quest_level(ctx.author)
-                        await self.quest(ctx)  # send next level
-                    else:
-                        await ctx.send("nah, try harder")
-                except TimeoutError:
-                    print(f"{ctx.author} did not reply")
-                    await ctx.author.send("feel free to come back anytime :))")
-            except IndexError:
-                await ctx.send("congratulations you completed our quest ez")
-        else:
-            print(f"{ctx.author} failed the vibe check")
-            await ctx.send("you failed the vibe check, no quest for you")
+                answer = await self.bot.wait_for('message', check=check, timeout=60)
+                print(answer.content)
+                if answer.content == flag:
+                    await ctx.send(":sparkles: Correct! :sparkles:")
+                    print(f"{ctx.author} answered level {level} correctly")
+                    await update_quest_level(ctx.author)
+                    await self.quest(ctx)  # send next level
+                else:
+                    await ctx.send("nah, try harder")
+            except TimeoutError:
+                print(f"{ctx.author} did not reply")
+                await ctx.author.send("feel free to come back anytime :))")
+        except IndexError:
+            await ctx.send("congratulations you completed our quest ez")
+
