@@ -74,7 +74,7 @@ class Info(commands.Cog):
         await ctx.send("right here :) \ntwitch: <https://www.twitch.tv/vandyhacks> "
                        "\ndevpost: <https://vandyhacks-retro-edn.devpost.com/> "
                        "\nday of: <https://dayof.vandyhacks.org/> "
-                       "\n workshops: <https://learn.vandyhacks.org/> ")
+                       "\nworkshops: <https://learn.vandyhacks.org/> ")
 
     @commands.command(name="why")
     async def vh_why(self, ctx):
