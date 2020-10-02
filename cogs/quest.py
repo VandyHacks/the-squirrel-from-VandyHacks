@@ -25,18 +25,18 @@ class Quest(commands.Cog):
              "[->+++<]>-.>--[-->+++<]>.\n"
              "```",
              "vh{tabr1el_is_l3wd}"),
-            (
-            "this is a placeholder, check back once the ~~ctf~~ hackathon begins! \nP.S. there's a way to still clear "
-            "this level if you can :P",
-            ""),  # empty message can still get past this
             ("Did you tell Tabriel Ging how much you love VandyHacks? He's asking that frequently.",
              "vh{v1rtually_the_be$t_<3}"),
             ("everyone ask what is vh, why is vh, no one ask how is vh",
-             "vh{PLACEHOLDER}"),
-            ("Dark web? More like dork web.",
-             "vh{YET_ANOTHER_PLACEHOLDER}"),
+             "vh{aww_thx_4_asking_heart_emoji}"),
             ("This is off the *record*, but we're really **digging** the website this year. Are you? ;)",
-             "vh{PLACEHOLDER_AAAAAAAA}")]
+             "vh{p/q2-q4!}"),
+            (
+            "this level has no answer, literally, it's an empty string. "
+            "But you can still get past it, I believe in you!",
+            ""),  # empty message can still get past this
+            ("Dark web? More like dork web.",
+             "vh{YET_ANOTHER_PLACEHOLDER}")]
 
     @commands.command()
     async def quest(self, ctx):
