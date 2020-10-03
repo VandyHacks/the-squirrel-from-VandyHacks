@@ -99,7 +99,7 @@ async def help_message(ctx):
     embed = discord.Embed(title="the squirrel from VandyHacks", description="Here are the commands you can use:",
                           color=16761095)
 
-    embed.add_field(name="`vh when`", value='Time until VH VII begins!', inline=False)
+    embed.add_field(name="`vh when`", value='Time until VH VII ends!', inline=False)
     embed.add_field(name="`vh schedule`", value="interactive events schedule :calendar_spiral:", inline=False)
     embed.add_field(name="`vh quest`", value="super secret quest for you :eyes:", inline=False)
     embed.add_field(name="`vh pat`", value="pat the squirrel <:squirrelL:757097790181605416>", inline=False)
