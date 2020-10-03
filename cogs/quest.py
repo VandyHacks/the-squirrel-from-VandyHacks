@@ -36,9 +36,11 @@ class Quest(commands.Cog):
             "this level has no answer, literally, it's an empty string. "
             "But you can still get past it, I believe in you!",
             ""),  # empty message can still get past this
-            ("you\u200b \u200bare \u200e\u200bnearing \u200e\u200bthe \u200bend. \u200e\u200bYour \u200b\u200e\u200b"
-             "flag \u200b\u200e\u200bis \u200b\u200ehere, \u200e\u200bwrap \u200b\u200e\u200bit \u200b\u200ein "
-             "\u200e\u200bvh{} \u200e\u200balso \u200eit's all uppercase.",
+            ("you\u200b\u200b\u200b\u200b \u200b\u200bare \u200e\u200b\u200bnearing \u200e\u200b\u200bthe \u200bend. "
+             "\u200e\u200bYour \u200b\u200b\u200e\u200b"
+             "flag \u200b\u200e\u200b\u200bis \u200b\u200ehere, \u200e\u200e\u200bwrap \u200b\u200e\u200b\u200bit "
+             "\u200b\u200b\u200b\u200e\u200ein "
+             "\u200e\u200e\u200b\u200bvh{} \u200e\u200e\u200balso \u200e\u200e\u200e\u200e\u200eit's all uppercase.",
              "vh{HIDDENFLAGL3ZG0}"),
             ("Dark web? More like dork web. Find the teapot, vhviippzyvdissgj :onion:",
              "vh{this_is_the_end_im_sad}")]
