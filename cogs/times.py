@@ -9,7 +9,7 @@ from discord.ext import commands
 cst = tz(timedelta(hours=-5))  # cst is 5h behind utc
 
 start = dt.fromtimestamp(1601690400, tz=cst)  # 9pm vandy time oct 2 2020
-end = dt.fromtimestamp(1601906400, tz=cst)  # 9am vandy time oct 4 2020
+end = dt.fromtimestamp(1601820000, tz=cst)  # 9am vandy time oct 4 2020
 
 nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead of dt.now() for uniformity
 
