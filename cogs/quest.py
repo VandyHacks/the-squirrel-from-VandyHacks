@@ -1,6 +1,7 @@
 from asyncio import TimeoutError
 
 from database import get_quest_level, update_quest_level
+from cogs.times import nash, end
 
 import discord
 from discord.ext import commands
@@ -39,8 +40,8 @@ class Quest(commands.Cog):
              "flag \u200b\u200e\u200bis \u200b\u200ehere, \u200e\u200bwrap \u200b\u200e\u200bit \u200b\u200ein "
              "\u200e\u200bvh{} \u200e\u200balso \u200eit's all uppercase.",
              "vh{HIDDENFLAGL3ZG0}"),
-            ("Dark web? More like dork web.",
-             "vh{YET_ANOTHER_PLACEHOLDER}")]
+            ("Dark web? More like dork web. Find the teapot, vhviippzyvdissgj :onion:",
+             "vh{this_is_the_end_im_sad}")]
 
     @commands.command()
     async def quest(self, ctx):
@@ -52,6 +53,9 @@ class Quest(commands.Cog):
         if ctx.guild:
             await ctx.send('quests in my DMs only 👀')
             return await ctx.author.send('send `vh quest` :sweat_drops: :sweat_drops:')
+
+        if nash() > end:
+            return await ctx.author.send("quest is over i cri :(")
 
         print(f"{ctx.author} embarked on the quest")
         try:
