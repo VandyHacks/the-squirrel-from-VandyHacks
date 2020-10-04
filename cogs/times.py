@@ -47,16 +47,16 @@ sched = {
         ('11:30 pm', 'How to solve a Rubik\'s cube?', ''),
     ],
     4: [
-        ('8:30 am', 'Hacking Ends', ''),
+        ('8:00 am', 'How To Demo Workshop', ''),
         ('8:30 am', 'Make your Demo!', ''),
-        ('8:30 am', 'How To Demo Workshop', ''),
+        ('9:00 am', 'Hacking Ends', ''),
         ('9:30 am', 'Finish your Demo!', ''),
         ('9:45 am', 'Skribbl.io', ''),
         ('10:15 am', 'How To Judge Workshop', ''),
-        ('10:30 am', 'Keynote Speaker - Thiago Olson', ''),
+        ('10:30 am', 'Keynote Speaker - Thiago Olson', 'https://www.twitch.tv/vandyhacks'),
         ('10:30 am', 'Judging', ''),
-        ('1:20 pm', 'Keynote Speaker - Jennison Asuncion', ''),
-        ('3:00 pm', 'Closing Ceremony', ''),
+        ('1:20 pm', 'Keynote Speaker - Jennison Asuncion', 'https://www.twitch.tv/vandyhacks'),
+        ('3:00 pm', 'Closing Ceremony', 'https://www.twitch.tv/vandyhacks'),
     ]
 }
 
