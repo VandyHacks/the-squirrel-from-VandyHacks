@@ -61,8 +61,8 @@ class Info(commands.Cog):
 
     @commands.command(name="github", aliases=["gh"])
     async def github(self, ctx):
-        await ctx.send("closed source for now bb")  # potentially abstract stuff away and make this open sourceable?
-        # await ctx.send("Catch! https://github.com/VandyHacks/the-squirrel-from-VandyHacks")
+        # await ctx.send("closed source for now bb")  # potentially abstract stuff away and make this open sourceable?
+        await ctx.send("Catch! https://github.com/VandyHacks/the-squirrel-from-VandyHacks")
 
     @commands.command(name="pat")
     async def vh_pat(self, ctx):
