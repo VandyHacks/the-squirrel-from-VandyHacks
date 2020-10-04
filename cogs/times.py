@@ -52,6 +52,7 @@ sched = {
         ('8:30 am', 'How To Demo Workshop', ''),
         ('9:30 am', 'Finish your Demo!', ''),
         ('9:45 am', 'Skribbl.io', ''),
+        ('10:15 am', 'How To Judge Workshop', ''),
         ('10:30 am', 'Keynote Speaker - Thiago Olson', ''),
         ('10:30 am', 'Judging', ''),
         ('1:20 pm', 'Keynote Speaker - Jennison Asuncion', ''),
