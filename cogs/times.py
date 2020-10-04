@@ -50,7 +50,7 @@ sched = {
         ('8:00 am', 'How To Demo Workshop', ''),
         ('8:30 am', 'Make your Demo!', ''),
         ('9:00 am', 'Hacking Ends', ''),
-        ('9:30 am', 'Finish your Demo and submit to Devpost!'!', ''),
+        ('9:30 am', 'Finish your Demo and submit to Devpost!', ''),
         ('9:45 am', 'Skribbl.io', ''),
         ('10:15 am', 'How To Judge Workshop', ''),
         ('10:30 am', 'Keynote Speaker - Thiago Olson', 'https://www.twitch.tv/vandyhacks'),
