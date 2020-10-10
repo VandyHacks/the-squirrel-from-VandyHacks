@@ -99,22 +99,29 @@ class Times(commands.Cog):
     @commands.command(name="schedule")
     async def schedule(self, ctx):
         embeds = []
+        
         for day, events in sched.items():
             if day >= nash().day:
                 full_day = ["Friday", "Saturday", "Sunday"][day - 2]
-                embed = discord.Embed(title="VandyHacks VII Schedule :scroll:",
-                                      description=f"**{full_day}, Oct {day}** \nso much fun to be had :')",
-                                      color=16761095)
+                
+                embed = discord.Embed(
+                    title="VandyHacks VII Schedule :scroll:",
+                    description=f"**{full_day}, Oct {day}** \nso much fun to be had :')",
+                    color=16761095
+                    )
+                
                 for num, event in enumerate(events):
                     event_time, event_name, link = event
                     # unapologetically use walrus operator
-                    if ((left := dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").
-                            replace(tzinfo=cst)) > nash()):
-                        embed.add_field(name=f"{num + 1}. {event_name}",
-                                        value=(f"in {time_left(left)}" + (f", [**link**]({link})" if link else '')),
-                                        inline=False)
+                    if ((left := dt.strptime(
+                        f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)) > nash()):
+                        
+                        embed.add_field(
+                            name=f"{num + 1}. {event_name}",
+                            value=(f"in {time_left(left)}" + (f", [**link**]({link})" if link else '')),
+                            inline=False
+                        )
 
                 embeds.append(embed)
 
-        # TODO: split saturday into two embeds
         await paginate_embed(self.bot, ctx.channel, embeds)
