@@ -26,7 +26,7 @@ Pats = sqlalchemy.Table(
     "pats",
     meta,
     sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True, nullable=False),
-    sqlalchemy.Column("pat", sqlalchemy.Integer, nullable=False, server_default="0")
+    sqlalchemy.Column("pat", sqlalchemy.Integer, nullable=False, server_default="0"),
 )
 
 ENGINE = None

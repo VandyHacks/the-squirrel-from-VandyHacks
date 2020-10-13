@@ -13,8 +13,7 @@ from dotenv import load_dotenv
 # load environment variables from .env
 load_dotenv()
 
-bot = commands.Bot(command_prefix=["vh ", "vH ", "Vh ", "VH "],
-                   case_insensitive=True, help_command=None)
+bot = commands.Bot(command_prefix=["vh ", "vH ", "Vh ", "VH "], case_insensitive=True, help_command=None)
 
 VHVII = 755112297772351499  # vh vii server guild id
 
@@ -59,11 +58,13 @@ async def feedback(ctx):
 
     if ctx.author in bot.get_guild(VHVII).members:
         print("someone is giving feedback")
-        await ctx.author.send("please send your anonymous feedback in the next message, "
-                              "it will be directly shared with the organizers! :yellow_heart:")
+        await ctx.author.send(
+            "please send your anonymous feedback in the next message, "
+            "it will be directly shared with the organizers! :yellow_heart:"
+        )
         await ctx.author.send("or send q to quit feedback submission.")
         try:
-            feedback_resp = await bot.wait_for('message', check=check, timeout=60)
+            feedback_resp = await bot.wait_for("message", check=check, timeout=60)
             if feedback_resp.content == "q":
                 return await ctx.author.send("cool beans")
             await feedback_channel.send(f"there's new feedback!\n>>> {feedback_resp.content}")
@@ -96,10 +97,11 @@ async def help_message(ctx):
     Sends help message
     """
 
-    embed = discord.Embed(title="the squirrel from VandyHacks", description="Here are the commands you can use:",
-                          color=16761095)
+    embed = discord.Embed(
+        title="the squirrel from VandyHacks", description="Here are the commands you can use:", color=16761095
+    )
 
-    embed.add_field(name="`vh when`", value='Time until VH VII ends!', inline=False)
+    embed.add_field(name="`vh when`", value="Time until VH VII ends!", inline=False)
     embed.add_field(name="`vh schedule`", value="interactive events schedule :calendar_spiral:", inline=False)
     embed.add_field(name="`vh quest`", value="super secret quest for you :eyes:", inline=False)
     embed.add_field(name="`vh pat`", value="pat the squirrel <:squirrelL:757097790181605416>", inline=False)
@@ -111,10 +113,13 @@ async def help_message(ctx):
     embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code")
     embed.add_field(name="`vh stats`", value="Bot deployment info")
     embed.add_field(name="`vh ping`", value="Check bot latency")
-    embed.set_footer(text="fun fact: vandy has a 3:1 squirrel to student population!",
-                     icon_url="https://cdn.discordapp.com/emojis/757098871859183687.png?v=1")
+    embed.set_footer(
+        text="fun fact: vandy has a 3:1 squirrel to student population!",
+        icon_url="https://cdn.discordapp.com/emojis/757098871859183687.png?v=1",
+    )
 
     await ctx.send(embed=embed)
+
 
 # add cogs
 bot.add_cog(Info(bot))
