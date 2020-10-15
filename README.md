@@ -2,7 +2,7 @@
 
 The VandyHacks VII Discord Bot.
 
-If you’re looking to use the squirrel from VandyHacks for your hackathon (thanks <3 if you’re the ones already doing it!), take a look at the Developer Setup and Architecture sections below for an overview. 
+If you’re looking to use the squirrel from VandyHacks for your hackathon (thanks <3 if you’re the ones already doing it!), take a look at the [Developer Setup](#developer-setup) and [Architecture](#architecture) sections below for an overview. 
 
 ## Developer Setup
 
@@ -45,7 +45,7 @@ or `python bot.py` if you're on Windows or using a virtualenv or something.
 
 ## Architecture
 
-Here is all you need to know about how the bot is set up and the functionality the squirrel from VandyHacks offers.
+Let me run you down the bot setup structure.
 
 ```
 ├── bot.py
@@ -58,7 +58,7 @@ Here is all you need to know about how the bot is set up and the functionality t
 └── utils.py
 ```
 
-Let me run you down the structure, `bot.py` houses the code where the bot is initialized and general commands like help and event listeners are defined. (also an easter egg but shhh)
+`bot.py` houses the code where the bot is initialized and general commands like help and event listeners are defined. (also an easter egg but shhh)
 
 `database.py` is pretty much self-explanatory, it has the postgres engine as well as functions to create and update the hacker quest levels and squirrel pat counter. 
 
