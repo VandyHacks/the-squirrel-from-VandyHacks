@@ -6,14 +6,22 @@ from utils import paginate_embed
 import discord
 from discord.ext import commands
 
+"""
+customise these initial few variables according to 
+your hackathon timezone and start/end times
+"""
+
+# hackathon time zone
 cst = tz(timedelta(hours=-5))  # cst is 5h behind utc
 
-start = dt.fromtimestamp(1601690400, tz=cst)  # 9pm vandy time oct 2 2020
-end = dt.fromtimestamp(1601820000, tz=cst)  # 9am vandy time oct 4 2020
+# hackathon start and end times
+start = dt.fromtimestamp(1601690400, tz=cst)  # 9pm cst oct 2 2020
+end = dt.fromtimestamp(1601820000, tz=cst)  # 9am cst oct 4 2020
 
 nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead of dt.now() for uniformity
 
 # Oct 2-4, 2020
+# event format is (time, event name, event link if available)
 sched = {
     2: [
         ("4:30 pm", "Team Matching - Glimpse Session", ""),
@@ -106,7 +114,7 @@ class Times(commands.Cog):
 
         for day, events in sched.items():
             if day >= nash().day:
-                full_day = ["Friday", "Saturday", "Sunday"][day - 2]
+                full_day = ["Friday", "Saturday", "Sunday"][day - 2]  # 2 since that was the first day
 
                 embed = discord.Embed(
                     title="VandyHacks VII Schedule :scroll:",
@@ -119,7 +127,7 @@ class Times(commands.Cog):
                     # unapologetically use walrus operator
                     if (
                         left := dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
-                    ) > nash():
+                    ) > nash():  # check if event hasn't already passed
 
                         embed.add_field(
                             name=f"{num + 1}. {event_name}",

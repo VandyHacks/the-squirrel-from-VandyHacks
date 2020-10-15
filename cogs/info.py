@@ -71,7 +71,8 @@ class Info(commands.Cog):
     @commands.command(name="where")
     async def vh_where(self, ctx):
         await ctx.send(
-            "right here :) \ntwitch: <https://www.twitch.tv/vandyhacks> "
+            "right here :) "
+            "\ntwitch: <https://www.twitch.tv/vandyhacks> "
             "\ndevpost: <https://vandyhacks-retro-edn.devpost.com/> "
             "\nday of: <https://dayof.vandyhacks.org/> "
             "\nworkshops: <https://learn.vandyhacks.org/> "

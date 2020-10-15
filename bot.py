@@ -115,6 +115,7 @@ async def help_message(ctx):
     embed.add_field(name="`vh ping`", value="Check bot latency")
     embed.set_footer(
         text="fun fact: vandy has a 3:1 squirrel to student population!",
+        # squirrel emoji
         icon_url="https://cdn.discordapp.com/emojis/757098871859183687.png?v=1",
     )
 
