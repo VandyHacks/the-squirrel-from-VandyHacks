@@ -7,7 +7,7 @@ right = "➡"
 
 async def paginate_embed(bot, channel, embeds):
     """
-    async def modifier_func(type, curr_page) type: 1 for forward, -1 for backward.
+    takes list of embeds and paginates them with reactions
     """
     total_pages = len(embeds)
 
@@ -36,9 +36,6 @@ async def paginate_embed(bot, channel, embeds):
                     curr_page -= 1
                     await og_msg.edit(embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}"))
                 await og_msg.remove_reaction(left, user)
-            else:
-                continue
     except TimeoutError:
         await og_msg.remove_reaction(left, bot.user)
         await og_msg.remove_reaction(right, bot.user)
-        return
