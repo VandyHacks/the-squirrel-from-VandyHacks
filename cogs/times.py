@@ -7,7 +7,7 @@ import discord
 from discord.ext import commands
 
 """
-customise these initial few variables according to 
+customise these initial few variables according to
 your hackathon timezone and start/end times
 """
 
