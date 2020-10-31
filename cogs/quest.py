@@ -1,6 +1,7 @@
 from asyncio import TimeoutError
 
 from database import get_quest_level, update_quest_level
+
 # from cogs.times import nash, end
 
 import discord
@@ -62,8 +63,8 @@ class Quest(commands.Cog):
             await ctx.send("quests in my DMs only 👀")
             return await ctx.author.send("send `vh quest` :sweat_drops: :sweat_drops:")
 
-#        if nash() > end:
-#            return await ctx.author.send("quest is over i cri :(")
+        #        if nash() > end:
+        #            return await ctx.author.send("quest is over i cri :(")
 
         print(f"{ctx.author} embarked on the quest")
         try:

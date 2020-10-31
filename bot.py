@@ -13,7 +13,12 @@ from dotenv import load_dotenv
 # load environment variables from .env
 load_dotenv()
 
-bot = commands.Bot(command_prefix=["vh ", "vH ", "Vh ", "VH "], case_insensitive=True, help_command=None)
+intents = discord.Intents.default()
+intents.members = True  # required for on_member listeners
+
+bot = commands.Bot(
+    command_prefix=["vh ", "vH ", "Vh ", "VH "], case_insensitive=True, help_command=None, intents=intents
+)
 
 VHVII = 755112297772351499  # vh vii server guild id
 
