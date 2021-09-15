@@ -22,6 +22,9 @@ bot = commands.Bot(
 
 VHVII = 755112297772351499  # vh vii server guild id
 
+bot.load_extension("cogs.info")
+bot.load_extension("cogs.quest")
+bot.load_extension("cogs.times")
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -93,6 +96,7 @@ async def yeet(ctx, amount=1):
 
 @bot.command()
 async def lewd(ctx):
+    print("test2")
     await ctx.send("<:lewd:748915128824627340>")  # easter egg?
 
 
@@ -127,9 +131,16 @@ async def help_message(ctx):
     await ctx.send(embed=embed)
 
 
-# add cogs
-bot.add_cog(Info(bot))
-bot.add_cog(Quest(bot))
-bot.add_cog(Times(bot))
+@bot.command()
+@commands.is_owner()
+async def reload(ctx):
+    print("Reloading bot...")
+    # Reloads the file, thus updating the Cog class.
+    bot.reload_extension("cogs.info")
+    bot.reload_extension("cogs.quest")
+    bot.reload_extension("cogs.times")
+    embed = discord.Embed(title='Reload Complete', description=f'Info.py, Quest.py, Time.py successfully reloaded!', color=0xff00c8)
+    await ctx.send(embed=embed)
+
 
 bot.run(os.environ["DISCORD"])

@@ -87,3 +87,7 @@ class Quest(commands.Cog):
                 await ctx.author.send("feel free to come back anytime :))")
         except IndexError:
             await ctx.send("congratulations you completed our quest ez")
+
+
+def setup(bot):
+    bot.add_cog(Quest(bot))   

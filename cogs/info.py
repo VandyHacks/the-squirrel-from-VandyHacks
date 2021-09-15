@@ -56,7 +56,7 @@ class Info(commands.Cog):
         """
         Checks bot latency.
         """
-        await ctx.send(f"Pong! {self.bot.latency * 1000:.03f}ms")
+        await ctx.send(f"Ping! {self.bot.latency * 1000:.03f}ms")
 
     @commands.command(name="github", aliases=["gh"])
     async def github(self, ctx):
@@ -96,3 +96,9 @@ class Info(commands.Cog):
     @commands.command(name="who")
     async def vh_who(self, ctx):
         await ctx.send("need to think so much stuff sigh")
+
+
+def setup(bot):
+    bot.add_cog(Info(bot))   
+
+
