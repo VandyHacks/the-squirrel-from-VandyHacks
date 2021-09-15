@@ -56,7 +56,7 @@ class Info(commands.Cog):
         """
         Checks bot latency.
         """
-        await ctx.send(f"Ping! {self.bot.latency * 1000:.03f}ms")
+        await ctx.send(f"Pong! {self.bot.latency * 1000:.03f}ms")
 
     @commands.command(name="github", aliases=["gh"])
     async def github(self, ctx):
