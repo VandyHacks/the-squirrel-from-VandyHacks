@@ -141,4 +141,4 @@ class Times(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Times(bot))   
+    bot.add_cog(Times(bot))

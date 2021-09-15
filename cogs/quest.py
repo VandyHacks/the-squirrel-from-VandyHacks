@@ -90,4 +90,4 @@ class Quest(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Quest(bot))   
+    bot.add_cog(Quest(bot))

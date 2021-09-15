@@ -1,9 +1,6 @@
 import os
 from asyncio import TimeoutError
 
-from cogs.info import Info
-from cogs.quest import Quest
-from cogs.times import Times
 from database import make_hacker_profile, init_pats
 
 import discord
@@ -25,6 +22,7 @@ VHVII = 755112297772351499  # vh vii server guild id
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.quest")
 bot.load_extension("cogs.times")
+
 
 @bot.event
 async def on_command_error(ctx, error):
@@ -138,7 +136,7 @@ async def reload(ctx):
     bot.reload_extension("cogs.info")
     bot.reload_extension("cogs.quest")
     bot.reload_extension("cogs.times")
-    embed = discord.Embed(title='Reload Complete', description=f'Info.py, Quest.py, Time.py successfully reloaded!', color=0xff00c8)
+    embed = discord.Embed(title='Reload Complete', description='Info.py, Quest.py, Time.py successfully reloaded!', color=0xff00c8)
     await ctx.send(embed=embed)
 
 
