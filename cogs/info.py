@@ -99,6 +99,4 @@ class Info(commands.Cog):
 
 
 def setup(bot):
-    bot.add_cog(Info(bot))  
-
-
+    bot.add_cog(Info(bot))
