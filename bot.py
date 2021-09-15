@@ -96,7 +96,6 @@ async def yeet(ctx, amount=1):
 
 @bot.command()
 async def lewd(ctx):
-    print("test2")
     await ctx.send("<:lewd:748915128824627340>")  # easter egg?
 
 
