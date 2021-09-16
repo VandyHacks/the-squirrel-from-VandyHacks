@@ -136,8 +136,9 @@ async def reload(ctx):
     bot.reload_extension("cogs.info")
     bot.reload_extension("cogs.quest")
     bot.reload_extension("cogs.times")
-    embed = discord.Embed(title='Reload Complete', 
-    description='Info.py, Quest.py, Time.py successfully reloaded!', color=0xff00c8)
+    embed = discord.Embed(
+        title="Reload Complete", description="Info.py, Quest.py, Time.py successfully reloaded!", color=0xFF00C8
+    )
     await ctx.send(embed=embed)
 
 
