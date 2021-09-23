@@ -96,3 +96,7 @@ class Info(commands.Cog):
     @commands.command(name="who")
     async def vh_who(self, ctx):
         await ctx.send("need to think so much stuff sigh")
+
+
+def setup(bot):
+    bot.add_cog(Info(bot))

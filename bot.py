@@ -1,9 +1,6 @@
 import os
 from asyncio import TimeoutError
 
-from cogs.info import Info
-from cogs.quest import Quest
-from cogs.times import Times
 from database import make_hacker_profile, init_pats
 
 import discord
@@ -21,6 +18,10 @@ bot = commands.Bot(
 )
 
 VHVII = 755112297772351499  # vh vii server guild id
+
+bot.load_extension("cogs.info")
+bot.load_extension("cogs.quest")
+bot.load_extension("cogs.times")
 
 
 @bot.event
@@ -127,9 +128,18 @@ async def help_message(ctx):
     await ctx.send(embed=embed)
 
 
-# add cogs
-bot.add_cog(Info(bot))
-bot.add_cog(Quest(bot))
-bot.add_cog(Times(bot))
+@bot.command()
+@commands.is_owner()
+async def reload(ctx):
+    print("Reloading bot...")
+    # Reloads the file, thus updating the Cog class.
+    bot.reload_extension("cogs.info")
+    bot.reload_extension("cogs.quest")
+    bot.reload_extension("cogs.times")
+    embed = discord.Embed(
+        title="Reload Complete", description="Info.py, Quest.py, Time.py successfully reloaded!", color=0xFF00C8
+    )
+    await ctx.send(embed=embed)
+
 
 bot.run(os.environ["DISCORD"])
