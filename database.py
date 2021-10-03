@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # load environment variables from .env
 load_dotenv()
 
-DATABASE_URL = f"postgresql://{os.environ['DB_USER']}:{os.environ['DB_PASSWD']}@localhost/vh"
+DATABASE_URL = os.environ['DATABASE_URL']
 
 meta = sqlalchemy.MetaData()
 
