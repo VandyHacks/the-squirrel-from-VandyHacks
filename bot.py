@@ -17,7 +17,7 @@ bot = commands.Bot(
     command_prefix=["vh ", "vH ", "Vh ", "VH "], case_insensitive=True, help_command=None, intents=intents
 )
 
-VHVII = [755112297772351499, 891807649656602675]  # vh vii server guild id
+VHVII = [755112297772351499, 891807649656602675]  # vh vii, vh viii server guild id
 
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.quest")
@@ -107,14 +107,14 @@ async def help_message(ctx):
         title="the squirrel from VandyHacks", description="Here are the commands you can use:", color=16761095
     )
 
-    embed.add_field(name="`vh when`", value="Time until VH VII ends!", inline=False)
+    embed.add_field(name="`vh when`", value="Time until VH VIII ends!", inline=False)
     embed.add_field(name="`vh schedule`", value="interactive events schedule :calendar_spiral:", inline=False)
     embed.add_field(name="`vh quest`", value="super secret quest for you :eyes:", inline=False)
     embed.add_field(name="`vh pat`", value="pat the squirrel <:squirrelL:757097790181605416>", inline=False)
     embed.add_field(name="`vh feedback`", value="send anonymous feedback", inline=False)
     embed.add_field(name="`vh help`", value="Show this message", inline=False)
     embed.add_field(name="`vh where`", value="important hackathon links")
-    embed.add_field(name="`vh how`", value="VH VII hacker guide")
+    embed.add_field(name="`vh how`", value="VH VIII hacker guide")
     embed.add_field(name="`vh why`", value="why")
     embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code")
     embed.add_field(name="`vh stats`", value="Bot deployment info")
