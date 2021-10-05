@@ -15,8 +15,8 @@ your hackathon timezone and start/end times
 cst = tz(timedelta(hours=-5))  # cst is 5h behind utc
 
 # hackathon start and end times
-start = dt.fromtimestamp(1601690400, tz=cst)  # 9pm cst oct 2 2020
-end = dt.fromtimestamp(1601820000, tz=cst)  # 9am cst oct 4 2020
+start = dt.fromtimestamp(1633744800, tz=cst)  # 9pm cst oct 8 2021
+end = dt.fromtimestamp(1633874400, tz=cst)  # 9am cst oct 4 2020
 
 nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead of dt.now() for uniformity
 

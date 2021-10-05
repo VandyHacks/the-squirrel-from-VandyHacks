@@ -73,7 +73,7 @@ class Info(commands.Cog):
         await ctx.send(
             "right here :) "
             "\ntwitch: <https://www.twitch.tv/vandyhacks> "
-            "\ndevpost: <https://vandyhacks-retro-edn.devpost.com/> "
+            "\ndevpost: <https://vandyhacksviii.devpost.com/> "
             "\nday of: <https://dayof.vandyhacks.org/> "
             "\nworkshops: <https://learn.vandyhacks.org/> "
         )

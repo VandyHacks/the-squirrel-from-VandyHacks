@@ -17,7 +17,7 @@ bot = commands.Bot(
     command_prefix=["vh ", "vH ", "Vh ", "VH "], case_insensitive=True, help_command=None, intents=intents
 )
 
-VHVII = 755112297772351499  # vh vii server guild id
+VHVII = [755112297772351499, 891807649656602675]  # vh vii server guild id
 
 bot.load_extension("cogs.info")
 bot.load_extension("cogs.quest")
@@ -62,7 +62,7 @@ async def feedback(ctx):
     def check(m):  # check if author same and in DMs
         return m.author == ctx.author and m.channel.type == discord.ChannelType.private
 
-    if ctx.author in bot.get_guild(VHVII).members:
+    if ctx.author in bot.get_guild(VHVII[0]).members or ctx.author in bot.get_guild(VHVII[1]).members:
         print("someone is giving feedback")
         await ctx.author.send(
             "please send your anonymous feedback in the next message, "
