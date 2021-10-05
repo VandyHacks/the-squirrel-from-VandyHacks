@@ -7,8 +7,7 @@ from dotenv import load_dotenv
 # load environment variables from .env
 load_dotenv()
 
-DATABASE_URL = "postgresql://bdgfmgusdwmfsg:b5ed63db0376c52ba17051cd71ebc0ea87d31ffb7c95b601a8dc048ea27128c0@ec2-52-207-47-210.compute-1.amazonaws.com:5432/d6q6cajbrtkjqi"
-
+DATABASE_URL = os.environ['DATABASE_URL']
 meta = sqlalchemy.MetaData()
 
 # more like questers but that word seems weird
