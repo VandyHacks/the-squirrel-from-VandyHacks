@@ -57,7 +57,7 @@ async def feedback(ctx):
     """
     anonymous feedback command, shares stuff to pvt channel
     """
-    feedback_channel = bot.get_channel(755968512362676284)  # anon-feedback in official vh discord
+    feedback_channel = bot.get_channel(891807651372077110)  # anon-feedback in official vh discord
 
     def check(m):  # check if author same and in DMs
         return m.author == ctx.author and m.channel.type == discord.ChannelType.private

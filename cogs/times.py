@@ -117,7 +117,7 @@ class Times(commands.Cog):
                 full_day = ["Friday", "Saturday", "Sunday"][day - 2]  # 2 since that was the first day
 
                 embed = discord.Embed(
-                    title="VandyHacks VII Schedule :scroll:",
+                    title="VandyHacks VIII Schedule :scroll:",
                     description=f"**{full_day}, Oct {day}** \nso much fun to be had :')",
                     color=16761095,
                 )
