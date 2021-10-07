@@ -73,7 +73,7 @@ class Info(commands.Cog):
         await ctx.send(
             "right here :) "
             "\ntwitch: <https://www.twitch.tv/vandyhacks> "
-            "\ndevpost: <https://vandyhacks-retro-edn.devpost.com/> "
+            "\ndevpost: <https://vandyhacksviii.devpost.com/> "
             "\nworkshops: <https://learn.vandyhacks.org/> "
         )
 
@@ -86,7 +86,7 @@ class Info(commands.Cog):
         if text == "is vh":
             # for quest
             await ctx.author.send("thank you for asking <3 ||vh{aww_thx_4_asking_heart_emoji}||")
-        await ctx.send("https://vhl.ink/hackerguide")
+        await ctx.send("https://vhl.ink/hackerguide/")
 
     @commands.command(name="what")
     async def vh_what(self, ctx):
