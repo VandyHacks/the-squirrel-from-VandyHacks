@@ -74,7 +74,6 @@ class Info(commands.Cog):
             "right here :) "
             "\ntwitch: <https://www.twitch.tv/vandyhacks> "
             "\ndevpost: <https://vandyhacksviii.devpost.com/> "
-            "\nday of: <https://dayof.vandyhacks.org/> "
             "\nworkshops: <https://learn.vandyhacks.org/> "
         )
 
