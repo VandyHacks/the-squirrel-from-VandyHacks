@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 DATABASE_URL = os.environ['DATABASE_URL']
+
 meta = sqlalchemy.MetaData()
 
 # more like questers but that word seems weird
