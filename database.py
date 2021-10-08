@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 # load environment variables from .env
 load_dotenv()
 
-DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE_URL = os.environ["DATABASE_URL"]
 
 meta = sqlalchemy.MetaData()
 

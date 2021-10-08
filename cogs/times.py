@@ -6,7 +6,6 @@ from utils import paginate_embed
 import discord
 from discord.ext import commands
 import requests
-from datetime import datetime, timedelta
 from dateutil import parser
 from operator import itemgetter
 
@@ -28,18 +27,18 @@ nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead o
 
 url = "https://apply.vandyhacks.org/api/manage/events/pull"
 
-response = requests.request("GET", url)
+response = requests.get(url)
 
 data = response.json()
 
-sched = {}
 friday = []
 saturday = []
 sunday = []
+
 for event in data:
     today = parser.parse(event["startTimestamp"])
     today = today - timedelta(hours=5)
-    time = today.time().strftime("%I:%M %p")
+    time = today.time()
     if event["location"].startswith("https"):
         eventTuple = (time, event["name"], event["location"])
     else:
@@ -54,10 +53,11 @@ for event in data:
 friday = sorted(friday, key=itemgetter(0))
 saturday = sorted(saturday, key=itemgetter(0))
 sunday = sorted(sunday, key=itemgetter(0))
+friday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in friday]
+saturday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in saturday]
+sunday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in sunday]
 
-sched[8] = friday
-sched[9] = saturday
-sched[10] = sunday
+sched = {8: friday, 9: saturday, 10: sunday}
 
 
 def time_left(event):
