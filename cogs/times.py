@@ -6,7 +6,6 @@ from utils import paginate_embed
 import discord
 from discord.ext import commands
 import requests
-from datetime import timedelta
 from dateutil import parser
 from operator import itemgetter
 
