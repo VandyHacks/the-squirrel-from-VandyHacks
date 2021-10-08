@@ -13,9 +13,7 @@ async def paginate_embed(bot, channel, embeds):
 
     curr_page = 0
 
-    og_msg = await channel.send(
-        embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}")
-    )
+    og_msg = await channel.send(embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}"))
     if total_pages <= 1:
         return
 
@@ -23,34 +21,20 @@ async def paginate_embed(bot, channel, embeds):
     await og_msg.add_reaction(right)
 
     def check(reaction, user):
-        return (
-            not user.bot
-            and reaction.message.channel == channel
-            and reaction.message.id == og_msg.id
-        )
+        return not user.bot and reaction.message.channel == channel and reaction.message.id == og_msg.id
 
     try:
         while True:
-            reaction, user = await bot.wait_for(
-                "reaction_add", timeout=120.0, check=check
-            )
+            reaction, user = await bot.wait_for("reaction_add", timeout=120.0, check=check)
             if str(reaction.emoji) == right:
                 if curr_page < total_pages - 1:
                     curr_page += 1
-                    await og_msg.edit(
-                        embed=embeds[curr_page].set_footer(
-                            text=f"Page {curr_page+1}/{total_pages}"
-                        )
-                    )
+                    await og_msg.edit(embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}"))
                 await og_msg.remove_reaction(right, user)
             elif str(reaction.emoji) == left:
                 if curr_page > 0:
                     curr_page -= 1
-                    await og_msg.edit(
-                        embed=embeds[curr_page].set_footer(
-                            text=f"Page {curr_page+1}/{total_pages}"
-                        )
-                    )
+                    await og_msg.edit(embed=embeds[curr_page].set_footer(text=f"Page {curr_page+1}/{total_pages}"))
                 await og_msg.remove_reaction(left, user)
     except TimeoutError:
         await og_msg.remove_reaction(left, bot.user)

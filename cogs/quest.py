@@ -65,9 +65,7 @@ class Quest(commands.Cog):
     @commands.command()
     async def quest(self, ctx):
         def check(m):  # check if author same and in DMs
-            return (
-                m.author == ctx.author and m.channel.type == discord.ChannelType.private
-            )
+            return m.author == ctx.author and m.channel.type == discord.ChannelType.private
 
         # check if DMs
         if ctx.guild:

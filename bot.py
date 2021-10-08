@@ -60,17 +60,12 @@ async def feedback(ctx):
     """
     anonymous feedback command, shares stuff to pvt channel
     """
-    feedback_channel = bot.get_channel(
-        891807651372077110
-    )  # anon-feedback in official vh discord
+    feedback_channel = bot.get_channel(891807651372077110)  # anon-feedback in official vh discord
 
     def check(m):  # check if author same and in DMs
         return m.author == ctx.author and m.channel.type == discord.ChannelType.private
 
-    if (
-        ctx.author in bot.get_guild(VHVII[0]).members
-        or ctx.author in bot.get_guild(VHVII[1]).members
-    ):
+    if ctx.author in bot.get_guild(VHVII[0]).members or ctx.author in bot.get_guild(VHVII[1]).members:
         print("someone is giving feedback")
         await ctx.author.send(
             "please send your anonymous feedback in the next message, "
@@ -81,9 +76,7 @@ async def feedback(ctx):
             feedback_resp = await bot.wait_for("message", check=check, timeout=60)
             if feedback_resp.content == "q":
                 return await ctx.author.send("cool beans")
-            await feedback_channel.send(
-                f"there's new feedback!\n>>> {feedback_resp.content}"
-            )
+            await feedback_channel.send(f"there's new feedback!\n>>> {feedback_resp.content}")
             print("someone successfully gave feedback")
             await ctx.author.send("successfully sent your feedback!")
         except TimeoutError:
@@ -125,9 +118,7 @@ async def help_message(ctx):
         value="interactive events schedule :calendar_spiral:",
         inline=False,
     )
-    embed.add_field(
-        name="`vh quest`", value="super secret quest for you :eyes:", inline=False
-    )
+    embed.add_field(name="`vh quest`", value="super secret quest for you :eyes:", inline=False)
     embed.add_field(
         name="`vh pat`",
         value="pat the squirrel <:squirrelL:757097790181605416>",
@@ -138,9 +129,7 @@ async def help_message(ctx):
     embed.add_field(name="`vh where`", value="important hackathon links")
     embed.add_field(name="`vh how`", value="VH VIII hacker guide")
     embed.add_field(name="`vh why`", value="why")
-    embed.add_field(
-        name="`vh github` or `vh gh`", value="Link to the bot's source code"
-    )
+    embed.add_field(name="`vh github` or `vh gh`", value="Link to the bot's source code")
     embed.add_field(name="`vh stats`", value="Bot deployment info")
     embed.add_field(name="`vh ping`", value="Check bot latency")
     embed.set_footer(

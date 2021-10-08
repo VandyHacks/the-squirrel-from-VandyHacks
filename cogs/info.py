@@ -27,9 +27,7 @@ class Info(commands.Cog):
             color=16761095,
         )
 
-        embed.add_field(
-            name="Latency", value=f"{self.bot.latency*1000:.03f}ms", inline=False
-        )
+        embed.add_field(name="Latency", value=f"{self.bot.latency*1000:.03f}ms", inline=False)
 
         embed.add_field(
             name='"technical" info',
@@ -46,20 +44,14 @@ class Info(commands.Cog):
             value=f"{timedelta(seconds=int(time.time() - psutil.boot_time()))}",
         )
         embed.add_field(name="Bot CPU Usage", value=f"{process.cpu_percent():.02f}%")
-        embed.add_field(
-            name="Bot RAM Usage", value=f"{process.memory_info().rss / 1048576:.02f} MB"
-        )
+        embed.add_field(name="Bot RAM Usage", value=f"{process.memory_info().rss / 1048576:.02f} MB")
         embed.add_field(
             name="Bot Uptime",
             value=f"{timedelta(seconds=int(time.time() - process.create_time()))}",
         )
 
-        embed.add_field(
-            name=":bulb::link:", value="now some thought provoking links", inline=False
-        )
-        embed.add_field(
-            name="Cool Website", value="[vandyhacks.org](https://vandyhacks.org)"
-        )
+        embed.add_field(name=":bulb::link:", value="now some thought provoking links", inline=False)
+        embed.add_field(name="Cool Website", value="[vandyhacks.org](https://vandyhacks.org)")
         embed.add_field(
             name="Another Cool Website",
             value="[apply.vandyhacks.org]" "(https://apply.vandyhacks.org)",
@@ -86,15 +78,11 @@ class Info(commands.Cog):
     @commands.command(name="github", aliases=["gh"])
     async def github(self, ctx):
         # await ctx.send("closed source for now bb")  # potentially abstract stuff away and make this open sourceable?
-        await ctx.send(
-            "Catch! https://github.com/VandyHacks/the-squirrel-from-VandyHacks"
-        )
+        await ctx.send("Catch! https://github.com/VandyHacks/the-squirrel-from-VandyHacks")
 
     @commands.command(name="pat")
     async def vh_pat(self, ctx):
-        await ctx.send(
-            f"the squirrel from VandyHacks has been pet {await update_pat_counter()} times!"
-        )
+        await ctx.send(f"the squirrel from VandyHacks has been pet {await update_pat_counter()} times!")
         await ctx.send("<a:squirrelpat_gif:760595962048675894>")
 
     @commands.command(name="where")
@@ -114,9 +102,7 @@ class Info(commands.Cog):
     async def vh_how(self, ctx, *, text=None):
         if text == "is vh":
             # for quest
-            await ctx.author.send(
-                "thank you for asking <3 ||vh{aww_thx_4_asking_heart_emoji}||"
-            )
+            await ctx.author.send("thank you for asking <3 ||vh{aww_thx_4_asking_heart_emoji}||")
         await ctx.send("https://vhl.ink/hackerguide/")
 
     @commands.command(name="what")
