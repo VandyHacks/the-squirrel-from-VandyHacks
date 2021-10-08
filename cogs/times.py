@@ -5,6 +5,10 @@ from utils import paginate_embed
 
 import discord
 from discord.ext import commands
+import requests
+from datetime import datetime, timedelta
+from dateutil import parser
+from operator import itemgetter
 
 """
 customise these initial few variables according to
@@ -20,56 +24,41 @@ end = dt.fromtimestamp(1633874400, tz=cst)  # 9am cst oct 4 2020
 
 nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead of dt.now() for uniformity
 
-# Oct 2-4, 2020
-# event format is (time, event name, event link if available)
-sched = {
-    2: [
-        ("4:30 pm", "Team Matching - Glimpse Session", ""),
-        ("6:00 pm", "Opening Ceremony", "https://www.twitch.tv/vandyhacks"),
-        (
-            "7:00 pm",
-            "Keynote Speaker - Authors of Swipe to Unlock: Business Strategy for Technologists",
-            "https://vanderbilt.zoom.us/j/99212620856",
-        ),
-        ("7:50 pm", "Keynote Speaker - Jeffrey Rothschild", "https://www.twitch.tv/vandyhacks"),
-        ("8:30 pm", "Team Matching - Glimpse Session", "https://app.joinglimpse.com/room?key=FDC34E"),
-        ("9:00 pm", "Hacking begins", ""),
-        ("9:00 pm", "Full-Stack Workshop w/ Angular", "https://youtu.be/peKt6tRog60"),
-        ("9:00 pm", "Google Cloud Tech Talk - Cloud Hero Workshop", "https://youtu.be/lrEYwt9ZpyQ"),
-        ("10:00 pm", "Intro to Open Source Workshop", "https://youtu.be/0fkE7Awceig"),
-        ("11:00 pm", "SlackBot Workshop", "https://youtu.be/12lSoyqgSxw"),
-    ],
-    3: [
-        ("8:00 am", "Neural Networks Workshop", "https://youtu.be/Yue_yX5k-Hc"),
-        ("9:00 am", "React Native Workshop", "https://youtu.be/e2JHoda3RZU"),
-        ("10:00 am", "Big Data Workshop", "https://youtu.be/txRjZvOAMnc"),
-        ("11:00 am", "Google Cloud Workshop", "https://youtu.be/D_H4vchrSn8"),
-        ("1:00 pm", "Sponsor Career Fair", ""),
-        ("3:30 pm", "Zoomba", "https://vanderbilt.zoom.us/j/96037192950?pwd=RjhmUDVwTEV5QUNCbUc2SXZtZFlaQT09"),
-        ("4:00 pm", "Exploring Data-Driven Advocacy - The % Project", ""),
-        ("4:30 pm", "MLH Werewolf", ""),
-        ("5:00 pm", "Let's Bake Together!", ""),
-        ("6:00 pm", "MLH Capture The Flag", ""),
-        ("6:30 pm", "Keynote Speaker - Karl Mehta", "https://www.twitch.tv/vandyhacks"),
-        ("7:20 pm", "Skribbl.io", ""),
-        ("8:00 pm", "Keynote Speaker - Shauna McIntyre", "https://www.twitch.tv/vandyhacks"),
-        ("9:00 pm", "Typing Competition!", ""),
-        ("10:30 pm", "Guided meditation and mindfulness", ""),
-        ("11:30 pm", "How to solve a Rubik's cube?", ""),
-    ],
-    4: [
-        ("8:00 am", "How To Demo Workshop", ""),
-        ("8:30 am", "Make your Demo!", ""),
-        ("9:00 am", "Hacking Ends", ""),
-        ("9:30 am", "Finish your Demo and submit to Devpost!", ""),
-        ("9:45 am", "Skribbl.io", ""),
-        ("10:15 am", "How To Judge Workshop", ""),
-        ("10:30 am", "Keynote Speaker - Thiago Olson", "https://www.twitch.tv/vandyhacks"),
-        ("10:30 am", "Judging", ""),
-        ("1:20 pm", "Keynote Speaker - Jennison Asuncion", "https://www.twitch.tv/vandyhacks"),
-        ("3:00 pm", "Closing Ceremony", "https://www.twitch.tv/vandyhacks"),
-    ],
-}
+# Oct 8-10, 2021
+# event format is (event name, duration, formatted time, time (raw for sorting))
+
+url = "https://apply.vandyhacks.org/api/manage/events/pull"
+
+response = requests.request("GET", url)
+
+data = response.json()
+
+
+friday = []
+saturday = []
+sunday = []
+for x in data:
+    event = []
+    event.append(x['name'])
+    event.append("Duration: " + str(x['duration']) + " Minutes")
+    today = parser.parse(x['startTimestamp'])
+    today = (today - timedelta(hours=5))
+    time = today.time().strftime("%I:%M %p") 
+    event.append("Time: " + time + " CST")
+    if (today.weekday() == 4):
+        event.append(today)
+        friday.append(event)
+    elif (today.weekday() == 5):
+        event.append(today)
+        saturday.append(event)
+    else:
+        event.append(today)
+        sunday.append(event)
+        
+
+friday = sorted(friday, key=itemgetter(3))
+saturday = sorted(saturday, key=itemgetter(3))
+sunday = sorted(sunday, key=itemgetter(3))
 
 
 def time_left(event):
@@ -110,34 +99,28 @@ class Times(commands.Cog):
 
     @commands.command(name="schedule")
     async def schedule(self, ctx):
-        embeds = []
+        embed=discord.Embed(title="Vandy Hacks VIII", description="Hackathon Schedule", color=0x566f8f)
+        embed.set_thumbnail(url="https://vandyhacks.org/assets/logo.png")
+        
+        
+        embed.add_field(name="> Friday", value="Event List", inline=False)
+        for event in friday:
+            embed.add_field(name=event[0], value=event[1] + " | " + event[2], inline=False)
 
-        for day, events in sched.items():
-            if day >= nash().day:
-                full_day = ["Friday", "Saturday", "Sunday"][day - 2]  # 2 since that was the first day
+        
+        embed.add_field(name="> Saturday", value="Event List", inline=False)
+        for event in saturday:
+            embed.add_field(name=event[0], value=event[1] + " | " + event[2], inline=False)
 
-                embed = discord.Embed(
-                    title="VandyHacks VIII Schedule :scroll:",
-                    description=f"**{full_day}, Oct {day}** \nso much fun to be had :')",
-                    color=16761095,
-                )
+        
 
-                for num, event in enumerate(events):
-                    event_time, event_name, link = event
-                    # unapologetically use walrus operator
-                    if (
-                        left := dt.strptime(f"2020 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
-                    ) > nash():  # check if event hasn't already passed
-
-                        embed.add_field(
-                            name=f"{num + 1}. {event_name}",
-                            value=(f"in {time_left(left)}" + (f", [**link**]({link})" if link else "")),
-                            inline=False,
-                        )
-
-                embeds.append(embed)
-
-        await paginate_embed(self.bot, ctx.channel, embeds)
+        embed2=discord.Embed(color=0x566f8f)
+        embed2.add_field(name="> Sunday", value="Event List", inline=False)
+        for event in sunday:
+            embed2.add_field(name=event[0], value=event[1] + " | " + event[2], inline=False)
+        embed2.set_footer(text="fun fact: disneyland wait times are shorter than the randwich line")
+        await ctx.send(embed=embed)
+        await ctx.send(embed=embed2)
 
 
 def setup(bot):
