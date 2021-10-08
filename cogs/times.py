@@ -27,7 +27,7 @@ nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead o
 
 url = "https://apply.vandyhacks.org/api/manage/events/pull"
 
-response = requests.request("GET", url)
+response = requests.get(url)
 
 data = response.json()
 
