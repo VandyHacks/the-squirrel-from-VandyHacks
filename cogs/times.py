@@ -20,12 +20,11 @@ cst = tz(timedelta(hours=-5))  # cst is 5h behind utc
 
 # hackathon start and end times
 start = dt.fromtimestamp(1633744800, tz=cst)  # 9pm cst oct 8 2021
-end = dt.fromtimestamp(1633874400, tz=cst)  # 9am cst oct 4 2020
+end = dt.fromtimestamp(1633874400, tz=cst)  # 9am cst oct 10 2020
 
 nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead of dt.now() for uniformity
 
 # Oct 8-10, 2021
-# event format is (event name, duration, formatted time, time (raw for sorting))
 
 url = "https://apply.vandyhacks.org/api/manage/events/pull"
 
@@ -33,33 +32,25 @@ response = requests.request("GET", url)
 
 data = response.json()
 
-
+sched = {}
 friday = []
 saturday = []
 sunday = []
 for x in data:
-    event = []
-    event.append(x['name'])
-    event.append("Duration: " + str(x['duration']) + " Minutes")
     today = parser.parse(x['startTimestamp'])
     today = (today - timedelta(hours=5))
     time = today.time().strftime("%I:%M %p") 
-    event.append("Time: " + time + " CST")
+    eventTuple = (time, x['name'], x['location'])
     if (today.weekday() == 4):
-        event.append(today)
-        friday.append(event)
+        friday.append(eventTuple)
     elif (today.weekday() == 5):
-        event.append(today)
-        saturday.append(event)
+        saturday.append(eventTuple)
     else:
-        event.append(today)
-        sunday.append(event)
+        sunday.append(eventTuple)
         
-
-friday = sorted(friday, key=itemgetter(3))
-saturday = sorted(saturday, key=itemgetter(3))
-sunday = sorted(sunday, key=itemgetter(3))
-
+sched[8] = friday
+sched[9] = saturday
+sched[10] = sunday
 
 def time_left(event):
     # returns string with duration composed
@@ -92,35 +83,41 @@ class Times(commands.Cog):
         else:
             # compose string accordingly
             breakdown = (
-                "VandyHacks VIII " + ("begins " if start > nash() else "ends ") + "in " + time_left(event) + " bb"
+                "VandyHacks VII " + ("begins " if start > nash() else "ends ") + "in " + time_left(event) + " bb"
             )
 
         await ctx.send(breakdown)
 
     @commands.command(name="schedule")
     async def schedule(self, ctx):
-        embed=discord.Embed(title="Vandy Hacks VIII", description="Hackathon Schedule", color=0x566f8f)
-        embed.set_thumbnail(url="https://vandyhacks.org/assets/logo.png")
-        
-        
-        embed.add_field(name="> Friday", value="Event List", inline=False)
-        for event in friday:
-            embed.add_field(name=event[0], value=event[1] + " | " + event[2], inline=False)
+        embeds = []
 
-        
-        embed.add_field(name="> Saturday", value="Event List", inline=False)
-        for event in saturday:
-            embed.add_field(name=event[0], value=event[1] + " | " + event[2], inline=False)
+        for day, events in sched.items():
+            if day >= nash().day:
+                full_day = ["Friday", "Saturday", "Sunday"][day - 8]  # 2 since that was the first day
 
-        
+                embed = discord.Embed(
+                    title="VandyHacks VIII Schedule :scroll:",
+                    description=f"**{full_day}, Oct {day}** \nso much fun to be had :')",
+                    color=16761095,
+                )
 
-        embed2=discord.Embed(color=0x566f8f)
-        embed2.add_field(name="> Sunday", value="Event List", inline=False)
-        for event in sunday:
-            embed2.add_field(name=event[0], value=event[1] + " | " + event[2], inline=False)
-        embed2.set_footer(text="fun fact: disneyland wait times are shorter than the randwich line")
-        await ctx.send(embed=embed)
-        await ctx.send(embed=embed2)
+                for num, event in enumerate(events):
+                    event_time, event_name, link = event
+                    # unapologetically use walrus operator
+                    if (
+                        left := dt.strptime(f"2021 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
+                    ) > nash():  # check if event hasn't already passed
+
+                        embed.add_field(
+                            name=f"{num + 1}. {event_name}",
+                            value=(f"in {time_left(left)}" + (f", [**link**]({link})" if link else "")),
+                            inline=False,
+                        )
+
+                embeds.append(embed)
+
+        await paginate_embed(self.bot, ctx.channel, embeds)
 
 
 def setup(bot):
