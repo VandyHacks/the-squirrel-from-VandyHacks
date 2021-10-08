@@ -22,9 +22,7 @@ cst = tz(timedelta(hours=-5))  # cst is 5h behind utc
 start = dt.fromtimestamp(1633744800, tz=cst)  # 9pm cst oct 8 2021
 end = dt.fromtimestamp(1633874400, tz=cst)  # 9am cst oct 10 2020
 
-nash = partial(
-    dt.now, tz=cst
-)  # gives current time in nashville, use instead of dt.now() for uniformity
+nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead of dt.now() for uniformity
 
 # Oct 8-10, 2021
 
@@ -93,11 +91,7 @@ class Times(commands.Cog):
         else:
             # compose string accordingly
             breakdown = (
-                "VandyHacks VIII "
-                + ("begins " if start > nash() else "ends ")
-                + "in "
-                + time_left(event)
-                + " bb"
+                "VandyHacks VIII " + ("begins " if start > nash() else "ends ") + "in " + time_left(event) + " bb"
             )
 
         await ctx.send(breakdown)
@@ -108,9 +102,7 @@ class Times(commands.Cog):
 
         for day, events in sched.items():
             if day >= nash().day:
-                full_day = ["Friday", "Saturday", "Sunday"][
-                    day - 8
-                ]  # 2 since that was the first day
+                full_day = ["Friday", "Saturday", "Sunday"][day - 8]  # 2 since that was the first day
 
                 embed = discord.Embed(
                     title="VandyHacks VIII Schedule :scroll:",
@@ -122,17 +114,12 @@ class Times(commands.Cog):
                     event_time, event_name, link = event
                     # unapologetically use walrus operator
                     if (
-                        left := dt.strptime(
-                            f"2021 Oct {day} {event_time}", "%Y %b %d %I:%M %p"
-                        ).replace(tzinfo=cst)
+                        left := dt.strptime(f"2021 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
                     ) > nash():  # check if event hasn't already passed
 
                         embed.add_field(
                             name=f"{num + 1}. {event_name}",
-                            value=(
-                                f"in {time_left(left)}"
-                                + (f", [**link**]({link})" if link else "")
-                            ),
+                            value=(f"in {time_left(left)}" + (f", [**link**]({link})" if link else "")),
                             inline=False,
                         )
 
