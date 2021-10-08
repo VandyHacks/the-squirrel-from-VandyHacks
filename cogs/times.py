@@ -27,7 +27,7 @@ nash = partial(dt.now, tz=cst)  # gives current time in nashville, use instead o
 
 url = "https://apply.vandyhacks.org/api/manage/events/pull"
 
-response = requests.request("GET", url)
+response = requests.request(url)
 
 data = response.json()
 
@@ -57,9 +57,7 @@ friday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in friday]
 saturday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in saturday]
 sunday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in sunday]
 
-sched[8] = friday
-sched[9] = saturday
-sched[10] = sunday
+sched = {8: friday, 9: saturday, 10: sunday}
 
 
 def time_left(event):
