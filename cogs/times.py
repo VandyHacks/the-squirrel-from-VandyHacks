@@ -47,10 +47,15 @@ for x in data:
         saturday.append(eventTuple)
     else:
         sunday.append(eventTuple)
-        
+
+friday = sorted(friday, key=itemgetter(0))
+saturday = sorted(saturday, key=itemgetter(0))
+sunday = sorted(sunday, key=itemgetter(0))
+
 sched[8] = friday
 sched[9] = saturday
 sched[10] = sunday
+
 
 def time_left(event):
     # returns string with duration composed
