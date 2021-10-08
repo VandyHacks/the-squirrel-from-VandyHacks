@@ -2,3 +2,5 @@ discord.py
 databases[postgresql]
 python-dotenv
 psutil
+requests
+python-dateutil

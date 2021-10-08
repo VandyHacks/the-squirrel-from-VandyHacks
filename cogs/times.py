@@ -92,7 +92,7 @@ class Times(commands.Cog):
         else:
             # compose string accordingly
             breakdown = (
-                "VandyHacks VII " + ("begins " if start > nash() else "ends ") + "in " + time_left(event) + " bb"
+                "VandyHacks VIII " + ("begins " if start > nash() else "ends ") + "in " + time_left(event) + " bb"
             )
 
         await ctx.send(breakdown)
