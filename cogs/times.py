@@ -39,7 +39,7 @@ sunday = []
 for event in data:
     today = parser.parse(event["startTimestamp"])
     today = today - timedelta(hours=5)
-    time = today.time().strftime("%I:%M %p")
+    time = today.time()
     if event["location"].startswith("https"):
         eventTuple = (time, event["name"], event["location"])
     else:
@@ -54,6 +54,9 @@ for event in data:
 friday = sorted(friday, key=itemgetter(0))
 saturday = sorted(saturday, key=itemgetter(0))
 sunday = sorted(sunday, key=itemgetter(0))
+friday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in friday]
+saturday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in saturday]
+sunday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in sunday]
 
 sched[8] = friday
 sched[9] = saturday
