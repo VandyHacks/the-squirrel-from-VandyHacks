@@ -14,10 +14,7 @@ intents = discord.Intents.default()
 intents.members = True  # required for on_member listeners
 
 bot = commands.Bot(
-    command_prefix=["vh ", "vH ", "Vh ", "VH "],
-    case_insensitive=True,
-    help_command=None,
-    intents=intents,
+    command_prefix=["vh ", "vH ", "Vh ", "VH "], case_insensitive=True, help_command=None, intents=intents
 )
 
 VHVII = [755112297772351499, 891807649656602675]  # vh vii, vh viii server guild id
@@ -107,23 +104,13 @@ async def help_message(ctx):
     """
 
     embed = discord.Embed(
-        title="the squirrel from VandyHacks",
-        description="Here are the commands you can use:",
-        color=16761095,
+        title="the squirrel from VandyHacks", description="Here are the commands you can use:", color=16761095
     )
 
     embed.add_field(name="`vh when`", value="Time until VH VIII ends!", inline=False)
-    embed.add_field(
-        name="`vh schedule`",
-        value="interactive events schedule :calendar_spiral:",
-        inline=False,
-    )
+    embed.add_field(name="`vh schedule`", value="interactive events schedule :calendar_spiral:", inline=False)
     embed.add_field(name="`vh quest`", value="super secret quest for you :eyes:", inline=False)
-    embed.add_field(
-        name="`vh pat`",
-        value="pat the squirrel <:squirrelL:757097790181605416>",
-        inline=False,
-    )
+    embed.add_field(name="`vh pat`", value="pat the squirrel <:squirrelL:757097790181605416>", inline=False)
     embed.add_field(name="`vh feedback`", value="send anonymous feedback", inline=False)
     embed.add_field(name="`vh help`", value="Show this message", inline=False)
     embed.add_field(name="`vh where`", value="important hackathon links")
@@ -150,9 +137,7 @@ async def reload(ctx):
     bot.reload_extension("cogs.quest")
     bot.reload_extension("cogs.times")
     embed = discord.Embed(
-        title="Reload Complete",
-        description="Info.py, Quest.py, Time.py successfully reloaded!",
-        color=0xFF00C8,
+        title="Reload Complete", description="Info.py, Quest.py, Time.py successfully reloaded!", color=0xFF00C8
     )
     await ctx.send(embed=embed)
 

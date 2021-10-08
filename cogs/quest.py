@@ -35,14 +35,8 @@ class Quest(commands.Cog):
             "Did you tell Tabriel Ging how much you love VandyHacks? He's asking that frequently.",
             "vh{v1rtually_the_be$t_<3}",
         ),
-        (
-            "everyone ask what is vh, why is vh, no one ask how is vh",
-            "vh{aww_thx_4_asking_heart_emoji}",
-        ),
-        (
-            "This is off the *record*, but we're really **digging** the website this year. Are you? ;)",
-            "vh{p/q2-q4!}",
-        ),
+        ("everyone ask what is vh, why is vh, no one ask how is vh", "vh{aww_thx_4_asking_heart_emoji}"),
+        ("This is off the *record*, but we're really **digging** the website this year. Are you? ;)", "vh{p/q2-q4!}"),
         (
             "this level has no answer, literally, it's an empty string. "
             "But you can still get past it, I believe in you!",
@@ -56,10 +50,7 @@ class Quest(commands.Cog):
             "\u200e\u200e\u200b\u200bvh{} \u200e\u200e\u200balso \u200e\u200e\u200e\u200e\u200eit's all uppercase.",
             "vh{HIDDENFLAGL3ZG0}",
         ),
-        (
-            "Dark web? More like dork web. Find the teapot, vhviippzyvdissgj :onion:",
-            "vh{this_is_the_end_im_sad}",
-        ),
+        ("Dark web? More like dork web. Find the teapot, vhviippzyvdissgj :onion:", "vh{this_is_the_end_im_sad}"),
     ]
 
     @commands.command()
