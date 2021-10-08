@@ -40,7 +40,10 @@ for x in data:
     today = parser.parse(x['startTimestamp'])
     today = (today - timedelta(hours=5))
     time = today.time().strftime("%I:%M %p") 
-    eventTuple = (time, x['name'], x['location'])
+    if ("https" in x['location']):
+        eventTuple = (time, x['name'], x['location'])
+    else:
+        eventTuple = (time, x['name'], "")
     if (today.weekday() == 4):
         friday.append(eventTuple)
     elif (today.weekday() == 5):
