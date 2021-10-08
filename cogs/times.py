@@ -31,10 +31,10 @@ response = requests.get(url)
 
 data = response.json()
 
-sched = {}
 friday = []
 saturday = []
 sunday = []
+
 for event in data:
     today = parser.parse(event["startTimestamp"])
     today = today - timedelta(hours=5)
