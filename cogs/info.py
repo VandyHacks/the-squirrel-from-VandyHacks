@@ -72,7 +72,7 @@ class Info(commands.Cog):
     async def vh_where(self, ctx, *, text=None):
         if text and "flag" in text and "please" in text:
             # for quest
-            await ctx.author.send("here you go brother vh{here_brother}")
+            return await ctx.author.send("here you go brother vh{here_brother}")
         await ctx.send(
             "right here :) "
             "\ntwitch: <https://www.twitch.tv/vandyhacks> "
