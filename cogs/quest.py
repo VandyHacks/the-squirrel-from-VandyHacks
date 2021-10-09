@@ -38,7 +38,7 @@ class Quest(commands.Cog):
             "If you *analyzed* those little links floating aroud, you might find a colorful flag.",
             "vh{blue_flag}"),
         (
-            "Don't you love our discord server? Shoutout to our designers for making some awesome assets."
+            "Don't you love our discord server? Shoutout to our designers for making some awesome assets.",
             "vh{imagine_using_discord}"
         ),
         (
