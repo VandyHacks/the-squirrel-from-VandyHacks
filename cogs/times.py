@@ -114,7 +114,9 @@ class Times(commands.Cog):
                     event_time, event_name, link, duration = event
                     # unapologetically use walrus operator
                     left = dt.strptime(f"2021 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
-                    if left + timedelta(minutes=duration) > nash():  # check if event hasn't already passed or is happening
+                    if (
+                        left + timedelta(minutes=duration) > nash()
+                    ):  # check if event hasn't already passed or is happening
                         msg = "Happening now!" if left <= nash() else f"in {time_left(left)}"
                         embed.add_field(
                             name=f"{num + 1}. {event_name}",
