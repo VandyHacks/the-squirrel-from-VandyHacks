@@ -46,8 +46,8 @@ class Quest(commands.Cog):
             "vh{vaken_more_like_vâken}",
         ),
         (
-            "Even though we're blasting off into space, we're still feeling a bit artsy."
-            "As we come to the end of our vh quest journey, we'd love to take a trip down memory lane.",
+            "Even though we're blasting off into space, we're still feeling a bit artsy. "
+            "As we come to the end of our vh quest journey, let's take a trip down memory lane.",
             "vh{what_is_p0pping}"
         ),
     ]
