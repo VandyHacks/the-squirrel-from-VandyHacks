@@ -76,6 +76,8 @@ class Quest(commands.Cog):
                 print(answer.content)
                 if answer.content == flag:
                     await ctx.send(":sparkles: Correct! :sparkles:")
+                    firehose = self.bot.get_channel(896499321749504020)
+                    await firehose.send(f"{ctx.author.name} with id {ctx.author.id} has reached level {level}.")
                     print(f"{ctx.author} answered level {level} correctly")
                     await update_quest_level(ctx.author)
                     await self.quest(ctx)  # send next level
