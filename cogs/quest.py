@@ -8,12 +8,13 @@ import discord
 from discord.ext import commands
 
 VHVIII = [755112297772351499, 891807649656602675]  # vh viii server guild id
-
+FIREHOSE_CHANNEL = 896499321749504020
 
 class Quest(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
+        self.firehose = bot.get_channel(FIREHOSE_CHANNEL)
+        
     # list of pairwise challenge-flags
     ques = [
         (
@@ -78,9 +79,8 @@ class Quest(commands.Cog):
                 print(answer.content)
                 if answer.content == flag:
                     await ctx.send(":sparkles: Correct! :sparkles:")
-                    firehose = self.bot.get_channel(896499321749504020)
-                    await firehose.send(f"{ctx.author.name} with id {ctx.author.id} has reached level {level}.")
-                    print(f"{ctx.author} answered level {level} correctly")
+                    await self.firehose.send(f"{ctx.author.name} with id {ctx.author.id} has reached level {level}.")
+                    print(f"{ctx.author} answered level {level+1} correctly")
                     await update_quest_level(ctx.author)
                     await self.quest(ctx)  # send next level
                 else:
