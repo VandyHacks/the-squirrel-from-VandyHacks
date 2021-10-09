@@ -42,7 +42,7 @@ class Quest(commands.Cog):
             "vh{imagine_using_discord}"
         ),
         (
-            "Here at Vandyhacks we love our open source projects, even if they sometimes have a lot of issues.",
+            "Here at VandyHacks we love our open source projects, even if they sometimes have a lot of issues.",
             "vh{vaken_more_like_vâken}",
         ),
         (
