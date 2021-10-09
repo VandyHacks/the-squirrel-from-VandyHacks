@@ -18,39 +18,38 @@ class Quest(commands.Cog):
     ques = [
         (
             "welcome to vh quest! this is a ctf-style, fun treasure hunt where you look for flags like "
-            "`vh{yes_this_is_a_flag_hehe}` hidden in places with cryptic clues to advance to the next level. "
+            "`vh{hi_im_a_flag}` hidden in places with cryptic clues to advance to the next level. "
             "Flags are always in the vh{} format. Feel free to reach out for hints and good luck on your quest! "
             "<:vh_heart:757444914983207002>",
-            "vh{yes_this_is_a_flag_hehe}",
+            "vh{hi_im_a_flag}",
         ),
         (
-            "```bf\n"
-            "----[-->+++++<]>.++[->+++<]>.-[----->+<]>.-------.+[->+++<]>++.+.[--->+<]>----.--[->+++++<]>+.+[->++"
-            "<]>+.+++++++.-------------.++++++++++.++++++++++.++[->+++<]>.+++++++++++++.[-->+<]>---.+[--->++<]>-."
-            "[->+++<]>-.>--[-->+++<]>.\n"
-            "```",
-            "vh{tabr1el_is_l3wd}",
+            "I have a notion that there might be some sort of guide for this level..."
+            "vh{thanks_4_read1ng}",
         ),
         (
-            "Did you tell Tabriel Ging how much you love VandyHacks? He's asking that frequently.",
-            "vh{v1rtually_the_be$t_<3}",
+            "Not sure *where* to look? Try asking the bot nicely :)",
+            "vh{here_brother}",
         ),
-        ("everyone ask what is vh, why is vh, no one ask how is vh", "vh{aww_thx_4_asking_heart_emoji}"),
-        ("This is off the *record*, but we're really **digging** the website this year. Are you? ;)", "vh{p/q2-q4!}"),
         (
-            "this level has no answer, literally, it's an empty string. "
-            "But you can still get past it, I believe in you!",
-            "",
-        ),  # empty message can still get past this
+            "Honestly, f*** this: https://hastebin.com/usawoxitoc.md",
+            "vh{factual}"),
         (
-            "you\u200b\u200b\u200b\u200b \u200b\u200bare \u200e\u200b\u200bnearing \u200e\u200b\u200bthe \u200bend. "
-            "\u200e\u200bYour \u200b\u200b\u200e\u200b"
-            "flag \u200b\u200e\u200b\u200bis \u200b\u200ehere, \u200e\u200e\u200bwrap \u200b\u200e\u200b\u200bit "
-            "\u200b\u200b\u200b\u200e\u200ein "
-            "\u200e\u200e\u200b\u200bvh{} \u200e\u200e\u200balso \u200e\u200e\u200e\u200e\u200eit's all uppercase.",
-            "vh{HIDDENFLAGL3ZG0}",
+            "If you *analyzed* those little links floating aroud, you might find a colorful flag.",
+            "vh{blue_flag}"),
+        (
+            "Don't you love our discord server? Shoutout to our designers for making some awesome assets."
+            "vh{imagine_using_discord}"
         ),
-        ("Dark web? More like dork web. Find the teapot, vhviippzyvdissgj :onion:", "vh{this_is_the_end_im_sad}"),
+        (
+            "Here at Vandyhacks we love our open source projects, even if they sometimes have a lot of issues.",
+            "vh{vaken_more_like_vâken}",
+        ),
+        (
+            "Even though we're blasting off into space, we're still feeling a bit artsy."
+            "As we come to the end of our vh quest journey, we'd love to take a trip down memory lane.",
+            "vh{what_is_p0pping}"
+        ),
     ]
 
     @commands.command()
