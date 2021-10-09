@@ -40,9 +40,9 @@ for event in data:
     today = today - timedelta(hours=5)
     time = today.time()
     if event["location"].startswith("https"):
-        eventTuple = (time, event["name"], event["location"])
+        eventTuple = (time, event["name"], event["location"], event["duration"])
     else:
-        eventTuple = (time, event["name"], "")
+        eventTuple = (time, event["name"], "", event["duration"])
     if today.weekday() == 4:
         friday.append(eventTuple)
     elif today.weekday() == 5:
@@ -53,9 +53,9 @@ for event in data:
 friday = sorted(friday, key=itemgetter(0))
 saturday = sorted(saturday, key=itemgetter(0))
 sunday = sorted(sunday, key=itemgetter(0))
-friday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in friday]
-saturday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in saturday]
-sunday = [(time.strftime("%I:%M %p"), name, loc) for time, name, loc in sunday]
+friday = [(time.strftime("%I:%M %p"), name, loc, duration) for time, name, loc, duration in friday]
+saturday = [(time.strftime("%I:%M %p"), name, loc, duration) for time, name, loc, duration in saturday]
+sunday = [(time.strftime("%I:%M %p"), name, loc, duration) for time, name, loc, duration in sunday]
 
 sched = {8: friday, 9: saturday, 10: sunday}
 
@@ -111,15 +111,16 @@ class Times(commands.Cog):
                 )
 
                 for num, event in enumerate(events):
-                    event_time, event_name, link = event
+                    event_time, event_name, link, duration = event
                     # unapologetically use walrus operator
+                    left = dt.strptime(f"2021 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
                     if (
-                        left := dt.strptime(f"2021 Oct {day} {event_time}", "%Y %b %d %I:%M %p").replace(tzinfo=cst)
-                    ) > nash():  # check if event hasn't already passed
-
+                        left + timedelta(minutes=duration) > nash()
+                    ):  # check if event hasn't already passed or is happening
+                        msg = "Happening now!" if left <= nash() else f"in {time_left(left)}"
                         embed.add_field(
                             name=f"{num + 1}. {event_name}",
-                            value=(f"in {time_left(left)}" + (f", [**link**]({link})" if link else "")),
+                            value=(msg + (f", [**link**]({link})" if link else "")),
                             inline=False,
                         )
 
