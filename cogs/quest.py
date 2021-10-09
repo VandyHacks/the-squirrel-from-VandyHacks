@@ -7,12 +7,12 @@ from database import get_quest_level, update_quest_level
 import discord
 from discord.ext import commands
 
+VHVIII = [755112297772351499, 891807649656602675]  # vh viii server guild id
+
 
 class Quest(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    VHVII = 755112297772351499  # vh vii server guild id
 
     # list of pairwise challenge-flags
     ques = [
@@ -24,31 +24,33 @@ class Quest(commands.Cog):
             "vh{hi_im_a_flag}",
         ),
         (
-            "I have a notion that there might be some sort of guide for this level..."
+            "I have a notion that there might be some sort of guide for this level...",
             "vh{thanks_4_read1ng}",
         ),
         (
             "Not sure *where* to look? Try asking the bot nicely :)",
-            "vh{here_brother}",
+            "vh{th4nks_br0th3r}",
         ),
         (
             "Honestly, f*** this: https://hastebin.com/usawoxitoc.md",
-            "vh{factual}"),
-        (
-            "If you *analyzed* those little links floating aroud, you might find a colorful flag.",
-            "vh{blue_flag}"),
-        (
-            "Don't you love our discord server? Shoutout to our designers for making some awesome assets."
-            "vh{imagine_using_discord}"
+            "vh{factual}",
         ),
         (
-            "Here at Vandyhacks we love our open source projects, even if they sometimes have a lot of issues.",
+            "If you *analyzed* those little links floating aroud, you might find a colorful flag.",
+            "vh{blue_flag}",
+        ),
+        (
+            "Don't you love our discord server? Shoutout to our designers for making some awesome assets.",
+            "vh{imagine_using_discord}",
+        ),
+        (
+            "Here at VandyHacks we love our open source projects, even if they sometimes have a lot of issues.",
             "vh{vaken_more_like_vâken}",
         ),
         (
-            "Even though we're blasting off into space, we're still feeling a bit artsy."
-            "As we come to the end of our vh quest journey, we'd love to take a trip down memory lane.",
-            "vh{what_is_p0pping}"
+            "Even though we're blasting off into space, we're still feeling a bit artsy. "
+            "As we come to the end of our vh quest journey, let's take a trip down memory lane.",
+            "vh{what_is_p0pping}",
         ),
     ]
 

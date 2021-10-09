@@ -69,7 +69,10 @@ class Info(commands.Cog):
         await ctx.send("<a:squirrelpat_gif:760595962048675894>")
 
     @commands.command(name="where")
-    async def vh_where(self, ctx):
+    async def vh_where(self, ctx, *, text=None):
+        if text and "flag" in text and "please" in text:
+            # for quest
+            return await ctx.author.send("here you go! ||vh{th4nks_br0th3r}||")
         await ctx.send(
             "right here :) "
             "\ntwitch: <https://www.twitch.tv/vandyhacks> "
@@ -83,9 +86,9 @@ class Info(commands.Cog):
 
     @commands.command(name="how")
     async def vh_how(self, ctx, *, text=None):
-        if text == "is vh":
-            # for quest
-            await ctx.author.send("thank you for asking <3 ||vh{aww_thx_4_asking_heart_emoji}||")
+        # if text == "is vh":
+        #     # for quest
+        #     await ctx.author.send("thank you for asking <3 ||vh{aww_thx_4_asking_heart_emoji}||")
         await ctx.send("https://vhl.ink/hackerguide/")
 
     @commands.command(name="what")
