@@ -29,7 +29,7 @@ class Quest(commands.Cog):
         ),
         (
             "Not sure *where* to look? Try asking the bot nicely :)",
-            "vh{here_brother}",
+            "vh{th4nks_br0th3r}",
         ),
         (
             "Honestly, f*** this: https://hastebin.com/usawoxitoc.md",
