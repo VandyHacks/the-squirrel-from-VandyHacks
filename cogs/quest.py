@@ -10,11 +10,12 @@ from discord.ext import commands
 VHVIII = [755112297772351499, 891807649656602675]  # vh viii server guild id
 FIREHOSE_CHANNEL = 896499321749504020
 
+
 class Quest(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.firehose = bot.get_channel(FIREHOSE_CHANNEL)
-        
+
     # list of pairwise challenge-flags
     ques = [
         (
