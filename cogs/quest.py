@@ -59,7 +59,7 @@ class Quest(commands.Cog):
             return m.author == ctx.author and m.channel.type == discord.ChannelType.private
 
         # check if DMs
-        if ctx.guild in VHVIII:
+        if ctx.guild:
             await ctx.send("quests in my DMs only 👀")
             return await ctx.author.send("send `vh quest` :sweat_drops: :sweat_drops:")
 
