@@ -24,7 +24,7 @@ class Quest(commands.Cog):
             "vh{hi_im_a_flag}",
         ),
         (
-            "I have a notion that there might be some sort of guide for this level..."
+            "I have a notion that there might be some sort of guide for this level...",
             "vh{thanks_4_read1ng}",
         ),
         (
