@@ -7,12 +7,12 @@ from database import get_quest_level, update_quest_level
 import discord
 from discord.ext import commands
 
+VHVIII = [755112297772351499, 891807649656602675]  # vh viii server guild id
+
 
 class Quest(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-
-    VHVII = 755112297772351499  # vh vii server guild id
 
     # list of pairwise challenge-flags
     ques = [
@@ -59,7 +59,7 @@ class Quest(commands.Cog):
             return m.author == ctx.author and m.channel.type == discord.ChannelType.private
 
         # check if DMs
-        if ctx.guild:
+        if ctx.guild in VHVIII:
             await ctx.send("quests in my DMs only 👀")
             return await ctx.author.send("send `vh quest` :sweat_drops: :sweat_drops:")
 
