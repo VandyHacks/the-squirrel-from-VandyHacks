@@ -8,6 +8,7 @@ import discord
 from discord.ext import commands
 
 VHVIII = [755112297772351499, 891807649656602675]  # vh viii server guild id
+FIREHOSE_CHANNEL = 896499321749504020
 
 
 class Quest(commands.Cog):
@@ -33,13 +34,15 @@ class Quest(commands.Cog):
         ),
         (
             "Honestly, f*** this: https://hastebin.com/usawoxitoc.md",
-            "vh{factual}"),
+            "vh{factual}",
+        ),
         (
             "If you *analyzed* those little links floating aroud, you might find a colorful flag.",
-            "vh{blue_flag}"),
+            "vh{blue_flag}",
+        ),
         (
             "Don't you love our discord server? Shoutout to our designers for making some awesome assets.",
-            "vh{imagine_using_discord}"
+            "vh{imagine_using_discord}",
         ),
         (
             "Here at VandyHacks we love our open source projects, even if they sometimes have a lot of issues.",
@@ -48,7 +51,7 @@ class Quest(commands.Cog):
         (
             "Even though we're blasting off into space, we're still feeling a bit artsy. "
             "As we come to the end of our vh quest journey, let's take a trip down memory lane.",
-            "vh{what_is_p0pping}"
+            "vh{what_is_p0pping}",
         ),
     ]
 
@@ -65,6 +68,7 @@ class Quest(commands.Cog):
         #        if nash() > end:
         #            return await ctx.author.send("quest is over i cri :(")
 
+        firehose_channel = self.bot.get_channel(FIREHOSE_CHANNEL)
         print(f"{ctx.author} embarked on the quest")
         try:
             level = await get_quest_level(ctx.author)
@@ -76,6 +80,9 @@ class Quest(commands.Cog):
                 print(answer.content)
                 if answer.content == flag:
                     await ctx.send(":sparkles: Correct! :sparkles:")
+                    await firehose_channel.send(
+                        f"{ctx.author.name} with id {ctx.author.id} has reached level {level+1}."
+                    )
                     print(f"{ctx.author} answered level {level} correctly")
                     await update_quest_level(ctx.author)
                     await self.quest(ctx)  # send next level
