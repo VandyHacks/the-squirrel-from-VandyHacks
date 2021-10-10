@@ -14,7 +14,6 @@ FIREHOSE_CHANNEL = 896499321749504020
 class Quest(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.firehose = bot.get_channel(FIREHOSE_CHANNEL)
 
     # list of pairwise challenge-flags
     ques = [
@@ -69,6 +68,7 @@ class Quest(commands.Cog):
         #        if nash() > end:
         #            return await ctx.author.send("quest is over i cri :(")
 
+        firehose_channel = self.bot.get_channel(FIREHOSE_CHANNEL)
         print(f"{ctx.author} embarked on the quest")
         try:
             level = await get_quest_level(ctx.author)
@@ -80,7 +80,7 @@ class Quest(commands.Cog):
                 print(answer.content)
                 if answer.content == flag:
                     await ctx.send(":sparkles: Correct! :sparkles:")
-                    await self.firehose.send(f"{ctx.author.name} with id {ctx.author.id} has reached level {level+1}.")
+                    await firehose_channel.send(f"{ctx.author.name} with id {ctx.author.id} has reached level {level+1}.")
                     print(f"{ctx.author} answered level {level} correctly")
                     await update_quest_level(ctx.author)
                     await self.quest(ctx)  # send next level
