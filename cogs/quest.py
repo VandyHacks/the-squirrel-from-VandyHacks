@@ -42,7 +42,7 @@ class Quest(commands.Cog):
         ),
         (
             "Don't you love our discord server? Shoutout to our designers for making some awesome assets.",
-            "vh{imagine_using_discord}",
+            "vh{imagine_using_disc0rd}",
         ),
         (
             "Here at VandyHacks we love our open source projects, even if they sometimes have a lot of issues.",
