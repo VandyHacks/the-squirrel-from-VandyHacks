@@ -8,6 +8,9 @@ If you’re looking to use the squirrel from VandyHacks for your hackathon (than
 
 the squirrel from VandyHacks requires Python 3.8+ (we use the walrus operator lol).
 
+### Using Nix
+`cd` into the repo and run `nix-shell`, you'll be in a [Nix](https://nixos.org) shell with a Python 3.8 interpreter with the proper dependencies.
+
 ### Installation
 
 Clone the repo by 
