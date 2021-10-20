@@ -3,7 +3,7 @@
 with pkgs;
 
 let
-  pythonEnv = (python3.withPackages (p: [
+  pythonEnv = (python38.withPackages (p: [
     p.discordpy
     p.databases
     p.python-dotenv
